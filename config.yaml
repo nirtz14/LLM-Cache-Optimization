@@ -2,7 +2,7 @@
 
 cache:
   size_mb: 100
-  similarity_threshold: 0.8
+  similarity_threshold: 0.7
   eviction_policy: lru
 
 context:
@@ -14,7 +14,7 @@ context:
 pca:
   enabled: true
   target_dimensions: 128
-  training_samples: 20
+  training_samples: 2000
   model_path: models/pca_model.pkl
   compression_threshold: 100
 

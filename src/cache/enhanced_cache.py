@@ -1,18 +1,73 @@
-"""Simple working cache implementation using verified GPTCache APIs."""
+"""Enhanced GPTCache implementation using proper GPTCache Cache builder pattern."""
 import time
-import json
-from typing import Optional, Any, Dict
-from sentence_transformers import SentenceTransformer
+from typing import Optional, Any, Dict, List
 import numpy as np
 
+from gptcache import Cache, Config
+from gptcache.adapter.api import put, get
 from gptcache.embedding import SBERT
-from gptcache.manager import get_data_manager
+from gptcache.manager import get_data_manager, CacheBase, VectorBase
+from gptcache.similarity_evaluation import SimilarityEvaluation
+from gptcache.similarity_evaluation.distance import SearchDistanceEvaluation
+from gptcache.processor.pre import get_prompt
 
 from ..utils.config import get_config
 from ..utils.metrics import get_performance_tracker, BenchmarkTimer, record_cache_request
 
+
+class EnhancedSimilarityEvaluation(SimilarityEvaluation):
+    """Enhanced similarity evaluation with context filtering and PCA support."""
+    
+    def __init__(
+        self, 
+        base_similarity: SimilarityEvaluation = None,
+        enable_context: bool = True,
+        enable_tau: bool = True,
+        config=None
+    ):
+        """Initialize enhanced similarity evaluation."""
+        self.base_similarity = base_similarity or SearchDistanceEvaluation()
+        self.enable_context = enable_context
+        self.enable_tau = enable_tau
+        self.config = config or get_config()
+        
+        # Initialize context similarity if enabled
+        self.context_similarity = None
+        if self.enable_context:
+            from ..core.context_similarity import ContextAwareSimilarity
+            self.context_similarity = ContextAwareSimilarity(
+                embedding_model=self.config.context.embedding_model,
+                context_window_size=self.config.context.window_size,
+                divergence_threshold=self.config.context.divergence_threshold,
+                base_similarity_func=self.base_similarity,
+            )
+        
+        # Initialize τ-manager if enabled
+        self.tau_manager = None
+        if self.enable_tau:
+            from ..core.tau_manager import TauManager
+            self.tau_manager = TauManager()
+    
+    def evaluation(self, src_dict: dict, cache_dict: dict, **kwargs) -> float:
+        """Evaluate similarity with context filtering."""
+        # Get base similarity score
+        similarity_score = self.base_similarity.evaluation(src_dict, cache_dict, **kwargs)
+        
+        # Apply context filtering if enabled
+        if self.enable_context and self.context_similarity:
+            context_score = self.context_similarity.evaluation(src_dict, cache_dict)
+            if context_score < self.config.context.divergence_threshold:
+                return 0.0  # Reject due to context mismatch
+        
+        return similarity_score
+    
+    def range(self):
+        """Return the range of similarity scores."""
+        return self.base_similarity.range()
+
+
 class EnhancedCache:
-    """Enhanced GPTCache that actually works."""
+    """Enhanced GPTCache using proper Cache builder pattern."""
     
     def __init__(
         self,
@@ -30,108 +85,72 @@ class EnhancedCache:
         self.enable_pca = enable_pca
         self.enable_tau = enable_tau
         
-        # Initialize GPTCache components
-        self.gptcache_embedding = SBERT(self.embedding_model_name)
-        self.data_manager = get_data_manager()
+        # Initialize embedding function (with PCA if enabled)
+        self.embedding_func = self._create_embedding_function()
         
-        # Initialize PCA compression if enabled
-        self.pca_wrapper = None
-        if self.enable_pca:
-            from ..core.pca_wrapper import PCAEmbeddingWrapper
-            base_func = lambda text: self.gptcache_embedding.to_embeddings(text)
-            self.pca_wrapper = PCAEmbeddingWrapper(
-                base_embedding_func=base_func,
-                target_dimensions=self.config.pca.target_dimensions,
-                model_path=self.config.pca.model_path
-            )
+        # Initialize data manager
+        self.data_manager = self._create_data_manager()
         
-        # Initialize context similarity if enabled
-        self.context_similarity = None
-        if self.enable_context:
-            from ..core.context_similarity import ContextAwareSimilarity
-            from gptcache.similarity_evaluation import SearchDistanceEvaluation
-            base_similarity = SearchDistanceEvaluation()
-            
-            self.context_similarity = ContextAwareSimilarity(
-                embedding_model=self.embedding_model_name,
-                context_window_size=self.config.context.window_size,
-                divergence_threshold=self.config.context.divergence_threshold,
-                base_similarity_func=base_similarity,
-            )
+        # Initialize similarity evaluation
+        self.similarity_evaluation = EnhancedSimilarityEvaluation(
+            enable_context=self.enable_context,
+            enable_tau=self.enable_tau,
+            config=self.config
+        )
         
-        # Initialize τ-manager if enabled
-        self.tau_manager = None
-        if self.enable_tau:
-            from ..core.tau_manager import TauManager
-            self.tau_manager = TauManager()
+        # Initialize GPTCache with proper builder pattern
+        self.cache = Cache()
+        
+        # Get current threshold (with τ-tuning if enabled)
+        current_threshold = self.config.cache.similarity_threshold
+        if self.enable_tau and hasattr(self.similarity_evaluation, 'tau_manager'):
+            current_threshold = self.similarity_evaluation.tau_manager.get_current_threshold()
+        
+        # Initialize cache with all components
+        self.cache.init(
+            embedding_func=self.embedding_func,
+            data_manager=self.data_manager,
+            similarity_evaluation=self.similarity_evaluation,
+            config=Config(similarity_threshold=current_threshold)
+        )
         
         # Statistics
         self.total_queries = 0
         self.cache_hits = 0
         self.cache_misses = 0
-        
-    def _embedding_to_string(self, embedding) -> str:
-        """Convert numpy embedding to hashable string."""
-        if hasattr(embedding, 'tolist'):
-            return json.dumps(embedding.tolist())
-        return json.dumps(embedding)
     
-    def _string_to_embedding(self, embedding_str: str):
-        """Convert string back to numpy array."""
-        return np.array(json.loads(embedding_str))
-    
-    def _cosine_similarity(self, emb1, emb2):
-        """Compute cosine similarity between two embeddings."""
-        emb1 = np.array(emb1)
-        emb2 = np.array(emb2)
-        return np.dot(emb1, emb2) / (np.linalg.norm(emb1) * np.linalg.norm(emb2))
-    
-    def _search_with_similarity(self, query_embedding, query: str, threshold: float = 0.8):
-        """Search and apply similarity evaluation."""
-        query_emb_array = np.array(query_embedding)
-        best_match = None
-        best_score = 0.0
+    def _create_embedding_function(self):
+        """Create embedding function with optional PCA compression."""
+        # Base SBERT embedding
+        base_embedding = SBERT(self.embedding_model_name)
         
-        # Search through stored data
-        for stored_embedding_str, stored_data in self.data_manager.data.items():
-            if stored_embedding_str == 'fake_embedding_string':  # Skip test data
-                continue
-                
-            try:
-                # Convert stored embedding back to array
-                stored_embedding = self._string_to_embedding(stored_embedding_str)
-                
-                # Handle dimension mismatch (e.g., if PCA was trained after some data was stored)
-                if query_emb_array.shape != stored_embedding.shape:
-                    # If we have PCA and stored embedding is larger, try to compress stored embedding
-                    if (self.enable_pca and self.pca_wrapper and 
-                        self.pca_wrapper.compressor is not None and
-                        stored_embedding.shape[0] > query_emb_array.shape[0]):
-                        
-                        try:
-                            stored_embedding = self.pca_wrapper.compressor.compress(stored_embedding)
-                        except:
-                            continue  # Skip if compression fails
-                    
-                    # If dimensions still don't match, skip this entry
-                    if query_emb_array.shape != stored_embedding.shape:
-                        continue
-                
-                # Compute similarity
-                similarity_score = self._cosine_similarity(query_emb_array, stored_embedding)
-                
-                # Check if above threshold and better than current best
-                if similarity_score >= threshold and similarity_score > best_score:
-                    best_score = similarity_score
-                    best_match = (stored_data[0], stored_data[1], similarity_score)  # query, answer, score
-                    
-            except Exception as e:
-                print(f"Similarity search error: {e}")
-                continue
+        if self.enable_pca:
+            from ..core.pca_wrapper import PCAEmbeddingWrapper
+            # Wrap with PCA compression
+            pca_wrapper = PCAEmbeddingWrapper(
+                base_embedding_func=base_embedding.to_embeddings,
+                target_dimensions=self.config.pca.target_dimensions,
+                model_path=self.config.pca.model_path
+            )
+            self.pca_wrapper = pca_wrapper
+            return pca_wrapper
+        else:
+            self.pca_wrapper = None
+            return base_embedding.to_embeddings
+    
+    def _create_data_manager(self):
+        """Create data manager with vector store for similarity search."""
+        if self.enable_pca:
+            # Use PCA target dimensions for vector store
+            dimension = self.config.pca.target_dimensions
+        else:
+            # Use SBERT default dimensions
+            dimension = SBERT(self.embedding_model_name).dimension
         
-        if best_match:
-            return best_match[1], best_match[2], True  # answer, score, hit
-        return None, 0.0, False  # no hit
+        # Use SQLite + FAISS for storage
+        cache_base = CacheBase("sqlite")
+        vector_base = VectorBase("faiss", dimension=dimension)
+        return get_data_manager(cache_base, vector_base)
     
     def query(
         self, 
@@ -145,34 +164,28 @@ class EnhancedCache:
         self.total_queries += 1
         
         # Add conversation turn to context tracker if enabled
-        if self.enable_context and self.context_similarity:
-            self.context_similarity.add_conversation_turn(
+        if (self.enable_context and 
+            hasattr(self.similarity_evaluation, 'context_similarity') and
+            self.similarity_evaluation.context_similarity):
+            self.similarity_evaluation.context_similarity.add_conversation_turn(
                 conversation_id=conversation_id,
                 query=query,
                 timestamp=start_time
             )
         
-        # Query the cache
+        # Query the cache using GPTCache API
         with BenchmarkTimer("cache_query") as timer:
             try:
-                # Generate embedding (with PCA compression if enabled)
-                if self.enable_pca and self.pca_wrapper:
-                    query_embedding = self.pca_wrapper(query)
-                else:
-                    query_embedding = self.gptcache_embedding.to_embeddings(query)
+                # Use GPTCache's adapter API
+                response = get(query, cache_obj=self.cache)
                 
-                # Determine current threshold (with τ-tuning if enabled)
-                current_threshold = self.config.cache.similarity_threshold
-                if self.enable_tau and self.tau_manager:
-                    current_threshold = self.tau_manager.get_current_threshold()
-                
-                # Search with similarity evaluation
-                response, similarity_score, cache_hit = self._search_with_similarity(
-                    query_embedding, query, threshold=current_threshold
-                )
+                cache_hit = response is not None
+                similarity_score = 1.0 if cache_hit else 0.0  # GPTCache handles similarity internally
                 
                 # Update τ-manager with results if enabled
-                if self.enable_tau and self.tau_manager:
+                if (self.enable_tau and 
+                    hasattr(self.similarity_evaluation, 'tau_manager') and 
+                    self.similarity_evaluation.tau_manager):
                     ground_truth_hit = None
                     if ground_truth_response:
                         ground_truth_hit = (
@@ -181,7 +194,7 @@ class EnhancedCache:
                             str(response).strip().lower() == ground_truth_response.strip().lower()
                         )
                     
-                    current_threshold = self.tau_manager.evaluate_threshold(
+                    self.similarity_evaluation.tau_manager.evaluate_threshold(
                         query=query,
                         similarity_score=similarity_score,
                         cache_hit=cache_hit,
@@ -198,9 +211,14 @@ class EnhancedCache:
                 cache_hit = False
                 response = None
                 similarity_score = 0.0
-                current_threshold = self.config.cache.similarity_threshold
         
         query_latency = timer.elapsed_ms
+        
+        # Get current threshold
+        try:
+            current_threshold = self.cache.config.similarity_threshold
+        except (AttributeError, TypeError):
+            current_threshold = self.config.cache.similarity_threshold
         
         # Record performance metrics
         compression_ratio = None
@@ -237,24 +255,18 @@ class EnhancedCache:
         """Store a query-response pair in the cache."""
         try:
             # Add to context tracker if enabled
-            if self.enable_context and self.context_similarity:
-                self.context_similarity.add_conversation_turn(
+            if (self.enable_context and 
+                hasattr(self.similarity_evaluation, 'context_similarity') and
+                self.similarity_evaluation.context_similarity):
+                self.similarity_evaluation.context_similarity.add_conversation_turn(
                     conversation_id=conversation_id,
                     query=query,
                     response=response,
                     timestamp=time.time()
                 )
             
-            # Generate embedding (with PCA compression if enabled)
-            if self.enable_pca and self.pca_wrapper:
-                query_embedding = self.pca_wrapper(query)
-            else:
-                query_embedding = self.gptcache_embedding.to_embeddings(query)
-                
-            query_embedding_str = self._embedding_to_string(query_embedding)
-            
-            # Store using verified API
-            self.data_manager.save(query, response, query_embedding_str)
+            # Use GPTCache's adapter API
+            put(query, response, cache_obj=self.cache)
             
         except Exception as e:
             print(f"Cache set error: {e}")
@@ -280,13 +292,17 @@ class EnhancedCache:
     
     def get_current_threshold(self) -> float:
         """Get current similarity threshold."""
-        return self.config.cache.similarity_threshold
+        try:
+            return self.cache.config.similarity_threshold
+        except (AttributeError, TypeError):
+            return self.config.cache.similarity_threshold
+
 
 def create_enhanced_cache(
     embedding_model: Optional[str] = None,
     **kwargs
 ) -> EnhancedCache:
-    """Create an enhanced cache that works."""
+    """Create an enhanced cache using proper GPTCache pattern."""
     return EnhancedCache(
         embedding_model=embedding_model,
         **kwargs
