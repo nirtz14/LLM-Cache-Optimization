@@ -1,0 +1,236 @@
+{
+  "metadata": {
+    "total_queries": 15,
+    "dataset_type": "mixed",
+    "seed": 42,
+    "generation_parameters": {
+      "repetitive_ratio": 0.3,
+      "novel_ratio": 0.3,
+      "contextual_ratio": 0.2,
+      "similar_ratio": 0.2
+    }
+  },
+  "queries": [
+    {
+      "id": "query_000013",
+      "query": "About two weeks",
+      "conversation_id": "contextual_conv_000",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [
+        "I'm planning a trip to Europe",
+        "Which countries are you considering?",
+        "France, Italy, and Spain",
+        "How long is your trip?"
+      ],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 5,
+        "total_turns": 6,
+        "conversation_topic": "topic_0"
+      }
+    },
+    {
+      "id": "query_000019",
+      "query": "Tell me about how to install python on windows",
+      "conversation_id": "similar_conv_000",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_000",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 4,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000017",
+      "query": "How to install Python on Windows?",
+      "conversation_id": "similar_conv_000",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_000",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 2,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000009",
+      "query": "I'm planning a trip to Europe",
+      "conversation_id": "contextual_conv_000",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 1,
+        "total_turns": 6,
+        "conversation_topic": "topic_0"
+      }
+    },
+    {
+      "id": "query_000003",
+      "query": "Can you help me with my order??",
+      "conversation_id": "repetitive_conv_2",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "Can you help me with my order?",
+      "metadata": {
+        "template": "Can you help me with my order?",
+        "variation": 0
+      }
+    },
+    {
+      "id": "query_000012",
+      "query": "How long is your trip?",
+      "conversation_id": "contextual_conv_000",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [
+        "I'm planning a trip to Europe",
+        "Which countries are you considering?",
+        "France, Italy, and Spain"
+      ],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 4,
+        "total_turns": 6,
+        "conversation_topic": "topic_0"
+      }
+    },
+    {
+      "id": "query_000010",
+      "query": "Which countries are you considering?",
+      "conversation_id": "contextual_conv_000",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [
+        "I'm planning a trip to Europe"
+      ],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 2,
+        "total_turns": 6,
+        "conversation_topic": "topic_0"
+      }
+    },
+    {
+      "id": "query_000015",
+      "query": "How to install Python on Windows",
+      "conversation_id": "similar_conv_000",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_000",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 0,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000016",
+      "query": "Can you explain how to install python on windows",
+      "conversation_id": "similar_conv_000",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_000",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 1,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000005",
+      "query": "I have a very specific problem with database management involving scalability concerns and performance issues, can you help me understand implementation details?",
+      "conversation_id": "novel_conv_8c303a3f",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I have a very specific problem with {topic} involving {detail1} and {detail2}, can you help me understand {aspect}?",
+        "length": 161
+      }
+    },
+    {
+      "id": "query_000007",
+      "query": "Can you explain the relationship between software development and best practices specifically in the context of security requirements?",
+      "conversation_id": "novel_conv_d172f2e9",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "Can you explain the relationship between {concept1} and {concept2} specifically in the context of {scenario}?",
+        "length": 134
+      }
+    },
+    {
+      "id": "query_000006",
+      "query": "I'm trying to accomplish common pitfalls but every time I try to repair, I get encounter data loss. Any suggestions for web design?",
+      "conversation_id": "novel_conv_2508905f",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I'm trying to {goal} but every time I {attempt}, I get {error}. Any suggestions for {context}?",
+        "length": 131
+      }
+    },
+    {
+      "id": "query_000001",
+      "query": "How do I reset my password?",
+      "conversation_id": "repetitive_conv_0",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "How do I reset my password?",
+      "metadata": {
+        "template": "How do I reset my password?",
+        "variation": 0
+      }
+    },
+    {
+      "id": "query_000014",
+      "query": "That's perfect for visiting all three countries",
+      "conversation_id": "contextual_conv_000",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [
+        "I'm planning a trip to Europe",
+        "Which countries are you considering?",
+        "France, Italy, and Spain",
+        "How long is your trip?",
+        "About two weeks"
+      ],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 6,
+        "total_turns": 6,
+        "conversation_topic": "topic_0"
+      }
+    },
+    {
+      "id": "query_000004",
+      "query": "How do I reset my password? Thanks!",
+      "conversation_id": "repetitive_conv_3",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "How do I reset my password?",
+      "metadata": {
+        "template": "How do I reset my password?",
+        "variation": 1
+      }
+    }
+  ]
+}

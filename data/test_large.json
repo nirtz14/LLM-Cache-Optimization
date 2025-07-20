@@ -1,0 +1,2560 @@
+{
+  "metadata": {
+    "total_queries": 185,
+    "dataset_type": "mixed",
+    "seed": 42,
+    "generation_parameters": {
+      "repetitive_ratio": 0.2,
+      "novel_ratio": 0.15,
+      "contextual_ratio": 0.15,
+      "similar_ratio": 0.5
+    }
+  },
+  "queries": [
+    {
+      "id": "query_000093",
+      "query": "What is machine learning?",
+      "conversation_id": "similar_conv_001",
+      "category": "similar",
+      "expected_response": "Response for What is machine learning",
+      "context_history": [],
+      "similarity_group": "similar_group_001",
+      "metadata": {
+        "base_query": "What is machine learning",
+        "variation_index": 2,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000143",
+      "query": "What is machine learning?",
+      "conversation_id": "similar_conv_011",
+      "category": "similar",
+      "expected_response": "Response for What is machine learning",
+      "context_history": [],
+      "similarity_group": "similar_group_011",
+      "metadata": {
+        "base_query": "What is machine learning",
+        "variation_index": 2,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000137",
+      "query": "Can you explain how to install python on windows",
+      "conversation_id": "similar_conv_010",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_010",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 1,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000157",
+      "query": "Can you explain understanding neural networks",
+      "conversation_id": "similar_conv_014",
+      "category": "similar",
+      "expected_response": "Response for Understanding neural networks",
+      "context_history": [],
+      "similarity_group": "similar_group_014",
+      "metadata": {
+        "base_query": "Understanding neural networks",
+        "variation_index": 1,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000057",
+      "query": "I'm trying to accomplish alternative approaches but every time I try to troubleshoot, I get encounter complexity. Any suggestions for software development?",
+      "conversation_id": "novel_conv_6caf6185",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I'm trying to {goal} but every time I {attempt}, I get {error}. Any suggestions for {context}?",
+        "length": 155
+      }
+    },
+    {
+      "id": "query_000118",
+      "query": "What is machine learning?",
+      "conversation_id": "similar_conv_006",
+      "category": "similar",
+      "expected_response": "Response for What is machine learning",
+      "context_history": [],
+      "similarity_group": "similar_group_006",
+      "metadata": {
+        "base_query": "What is machine learning",
+        "variation_index": 2,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000085",
+      "query": "I just want to be healthier and have more energy",
+      "conversation_id": "contextual_conv_004",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [
+        "I want to start exercising but don't know where to begin",
+        "What are your fitness goals?"
+      ],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 3,
+        "total_turns": 3,
+        "conversation_topic": "topic_4"
+      }
+    },
+    {
+      "id": "query_000071",
+      "query": "I need help with my computer",
+      "conversation_id": "contextual_conv_000",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 1,
+        "total_turns": 3,
+        "conversation_topic": "topic_0"
+      }
+    },
+    {
+      "id": "query_000126",
+      "query": "How to optimize web performance",
+      "conversation_id": "similar_conv_008",
+      "category": "similar",
+      "expected_response": "Response for How to optimize web performance",
+      "context_history": [],
+      "similarity_group": "similar_group_008",
+      "metadata": {
+        "base_query": "How to optimize web performance",
+        "variation_index": 0,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000039",
+      "query": "Can you tell me what are your business hours?",
+      "conversation_id": "repetitive_conv_18",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "What are your business hours?",
+      "metadata": {
+        "template": "What are your business hours?",
+        "variation": 3
+      }
+    },
+    {
+      "id": "query_000170",
+      "query": "Tell me about what is machine learning",
+      "conversation_id": "similar_conv_016",
+      "category": "similar",
+      "expected_response": "Response for What is machine learning",
+      "context_history": [],
+      "similarity_group": "similar_group_016",
+      "metadata": {
+        "base_query": "What is machine learning",
+        "variation_index": 4,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000003",
+      "query": "Can you help me with my order??",
+      "conversation_id": "repetitive_conv_2",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "Can you help me with my order?",
+      "metadata": {
+        "template": "Can you help me with my order?",
+        "variation": 0
+      }
+    },
+    {
+      "id": "query_000029",
+      "query": "What is the weather today??",
+      "conversation_id": "repetitive_conv_8",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "What is the weather today?",
+      "metadata": {
+        "template": "What is the weather today?",
+        "variation": 2
+      }
+    },
+    {
+      "id": "query_000132",
+      "query": "Can you explain understanding neural networks",
+      "conversation_id": "similar_conv_009",
+      "category": "similar",
+      "expected_response": "Response for Understanding neural networks",
+      "context_history": [],
+      "similarity_group": "similar_group_009",
+      "metadata": {
+        "base_query": "Understanding neural networks",
+        "variation_index": 1,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000001",
+      "query": "How do I reset my password?",
+      "conversation_id": "repetitive_conv_0",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "How do I reset my password?",
+      "metadata": {
+        "template": "How do I reset my password?",
+        "variation": 0
+      }
+    },
+    {
+      "id": "query_000171",
+      "query": "Best practices for database design",
+      "conversation_id": "similar_conv_017",
+      "category": "similar",
+      "expected_response": "Response for Best practices for database design",
+      "context_history": [],
+      "similarity_group": "similar_group_017",
+      "metadata": {
+        "base_query": "Best practices for database design",
+        "variation_index": 0,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000151",
+      "query": "How to optimize web performance",
+      "conversation_id": "similar_conv_013",
+      "category": "similar",
+      "expected_response": "Response for How to optimize web performance",
+      "context_history": [],
+      "similarity_group": "similar_group_013",
+      "metadata": {
+        "base_query": "How to optimize web performance",
+        "variation_index": 0,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000129",
+      "query": "I need help with how to optimize web performance",
+      "conversation_id": "similar_conv_008",
+      "category": "similar",
+      "expected_response": "Response for How to optimize web performance",
+      "context_history": [],
+      "similarity_group": "similar_group_008",
+      "metadata": {
+        "base_query": "How to optimize web performance",
+        "variation_index": 3,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000099",
+      "query": "I need help with best practices for database design",
+      "conversation_id": "similar_conv_002",
+      "category": "similar",
+      "expected_response": "Response for Best practices for database design",
+      "context_history": [],
+      "similarity_group": "similar_group_002",
+      "metadata": {
+        "base_query": "Best practices for database design",
+        "variation_index": 3,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000136",
+      "query": "How to install Python on Windows",
+      "conversation_id": "similar_conv_010",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_010",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 0,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000144",
+      "query": "I need help with what is machine learning",
+      "conversation_id": "similar_conv_011",
+      "category": "similar",
+      "expected_response": "Response for What is machine learning",
+      "context_history": [],
+      "similarity_group": "similar_group_011",
+      "metadata": {
+        "base_query": "What is machine learning",
+        "variation_index": 3,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000133",
+      "query": "Understanding neural networks?",
+      "conversation_id": "similar_conv_009",
+      "category": "similar",
+      "expected_response": "Response for Understanding neural networks",
+      "context_history": [],
+      "similarity_group": "similar_group_009",
+      "metadata": {
+        "base_query": "Understanding neural networks",
+        "variation_index": 2,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000010",
+      "query": "What is the weather today? Thanks!",
+      "conversation_id": "repetitive_conv_9",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "What is the weather today?",
+      "metadata": {
+        "template": "What is the weather today?",
+        "variation": 1
+      }
+    },
+    {
+      "id": "query_000041",
+      "query": "I have limited budget and need to achieve optimization strategies while considering downtime - is this possible?",
+      "conversation_id": "novel_conv_7d5aa05a",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I have {constraint} and need to {objective} while considering {limitation} - is this possible?",
+        "length": 112
+      }
+    },
+    {
+      "id": "query_000159",
+      "query": "I need help with understanding neural networks",
+      "conversation_id": "similar_conv_014",
+      "category": "similar",
+      "expected_response": "Response for Understanding neural networks",
+      "context_history": [],
+      "similarity_group": "similar_group_014",
+      "metadata": {
+        "base_query": "Understanding neural networks",
+        "variation_index": 3,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000075",
+      "query": "What programming language interests you?",
+      "conversation_id": "contextual_conv_001",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [
+        "I want to learn programming"
+      ],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 2,
+        "total_turns": 3,
+        "conversation_topic": "topic_1"
+      }
+    },
+    {
+      "id": "query_000092",
+      "query": "Can you explain what is machine learning",
+      "conversation_id": "similar_conv_001",
+      "category": "similar",
+      "expected_response": "Response for What is machine learning",
+      "context_history": [],
+      "similarity_group": "similar_group_001",
+      "metadata": {
+        "base_query": "What is machine learning",
+        "variation_index": 1,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000173",
+      "query": "Best practices for database design?",
+      "conversation_id": "similar_conv_017",
+      "category": "similar",
+      "expected_response": "Response for Best practices for database design",
+      "context_history": [],
+      "similarity_group": "similar_group_017",
+      "metadata": {
+        "base_query": "Best practices for database design",
+        "variation_index": 2,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000009",
+      "query": "Do you offer free shipping? Thanks!",
+      "conversation_id": "repetitive_conv_8",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "Do you offer free shipping?",
+      "metadata": {
+        "template": "Do you offer free shipping?",
+        "variation": 0
+      }
+    },
+    {
+      "id": "query_000141",
+      "query": "What is machine learning",
+      "conversation_id": "similar_conv_011",
+      "category": "similar",
+      "expected_response": "Response for What is machine learning",
+      "context_history": [],
+      "similarity_group": "similar_group_011",
+      "metadata": {
+        "base_query": "What is machine learning",
+        "variation_index": 0,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000161",
+      "query": "How to install Python on Windows",
+      "conversation_id": "similar_conv_015",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_015",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 0,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000123",
+      "query": "Best practices for database design?",
+      "conversation_id": "similar_conv_007",
+      "category": "similar",
+      "expected_response": "Response for Best practices for database design",
+      "context_history": [],
+      "similarity_group": "similar_group_007",
+      "metadata": {
+        "base_query": "Best practices for database design",
+        "variation_index": 2,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000037",
+      "query": "How do I track my order??",
+      "conversation_id": "repetitive_conv_16",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "How do I track my order?",
+      "metadata": {
+        "template": "How do I track my order?",
+        "variation": 0
+      }
+    },
+    {
+      "id": "query_000096",
+      "query": "Best practices for database design",
+      "conversation_id": "similar_conv_002",
+      "category": "similar",
+      "expected_response": "Response for Best practices for database design",
+      "context_history": [],
+      "similarity_group": "similar_group_002",
+      "metadata": {
+        "base_query": "Best practices for database design",
+        "variation_index": 0,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000125",
+      "query": "Tell me about best practices for database design",
+      "conversation_id": "similar_conv_007",
+      "category": "similar",
+      "expected_response": "Response for Best practices for database design",
+      "context_history": [],
+      "similarity_group": "similar_group_007",
+      "metadata": {
+        "base_query": "Best practices for database design",
+        "variation_index": 4,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000172",
+      "query": "Can you explain best practices for database design",
+      "conversation_id": "similar_conv_017",
+      "category": "similar",
+      "expected_response": "Response for Best practices for database design",
+      "context_history": [],
+      "similarity_group": "similar_group_017",
+      "metadata": {
+        "base_query": "Best practices for database design",
+        "variation_index": 1,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000184",
+      "query": "I need help with understanding neural networks",
+      "conversation_id": "similar_conv_019",
+      "category": "similar",
+      "expected_response": "Response for Understanding neural networks",
+      "context_history": [],
+      "similarity_group": "similar_group_019",
+      "metadata": {
+        "base_query": "Understanding neural networks",
+        "variation_index": 3,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000163",
+      "query": "How to install Python on Windows?",
+      "conversation_id": "similar_conv_015",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_015",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 2,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000179",
+      "query": "I need help with how to optimize web performance",
+      "conversation_id": "similar_conv_018",
+      "category": "similar",
+      "expected_response": "Response for How to optimize web performance",
+      "context_history": [],
+      "similarity_group": "similar_group_018",
+      "metadata": {
+        "base_query": "How to optimize web performance",
+        "variation_index": 3,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000017",
+      "query": "What are your business hours??",
+      "conversation_id": "repetitive_conv_16",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "What are your business hours?",
+      "metadata": {
+        "template": "What are your business hours?",
+        "variation": 1
+      }
+    },
+    {
+      "id": "query_000180",
+      "query": "Tell me about how to optimize web performance",
+      "conversation_id": "similar_conv_018",
+      "category": "similar",
+      "expected_response": "Response for How to optimize web performance",
+      "context_history": [],
+      "similarity_group": "similar_group_018",
+      "metadata": {
+        "base_query": "How to optimize web performance",
+        "variation_index": 4,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000130",
+      "query": "Tell me about how to optimize web performance",
+      "conversation_id": "similar_conv_008",
+      "category": "similar",
+      "expected_response": "Response for How to optimize web performance",
+      "context_history": [],
+      "similarity_group": "similar_group_008",
+      "metadata": {
+        "base_query": "How to optimize web performance",
+        "variation_index": 4,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000148",
+      "query": "Best practices for database design?",
+      "conversation_id": "similar_conv_012",
+      "category": "similar",
+      "expected_response": "Response for Best practices for database design",
+      "context_history": [],
+      "similarity_group": "similar_group_012",
+      "metadata": {
+        "base_query": "Best practices for database design",
+        "variation_index": 2,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000048",
+      "query": "I have a very specific problem with software development involving security requirements and performance issues, can you help me understand alternative approaches?",
+      "conversation_id": "novel_conv_aa1ee6e3",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I have a very specific problem with {topic} involving {detail1} and {detail2}, can you help me understand {aspect}?",
+        "length": 163
+      }
+    },
+    {
+      "id": "query_000022",
+      "query": "Where is your nearest location?",
+      "conversation_id": "repetitive_conv_1",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "Where is your nearest location?",
+      "metadata": {
+        "template": "Where is your nearest location?",
+        "variation": 2
+      }
+    },
+    {
+      "id": "query_000050",
+      "query": "My application broke and I need to repair it but I'm not sure about cost - what should I do?",
+      "conversation_id": "novel_conv_da4b53bf",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "My {item} broke and I need to {action} it but I'm not sure about {concern} - what should I do?",
+        "length": 92
+      }
+    },
+    {
+      "id": "query_000081",
+      "query": "Which countries are you considering?",
+      "conversation_id": "contextual_conv_003",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [
+        "I'm planning a trip to Europe"
+      ],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 2,
+        "total_turns": 3,
+        "conversation_topic": "topic_3"
+      }
+    },
+    {
+      "id": "query_000113",
+      "query": "How to install Python on Windows?",
+      "conversation_id": "similar_conv_005",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_005",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 2,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000167",
+      "query": "Can you explain what is machine learning",
+      "conversation_id": "similar_conv_016",
+      "category": "similar",
+      "expected_response": "Response for What is machine learning",
+      "context_history": [],
+      "similarity_group": "similar_group_016",
+      "metadata": {
+        "base_query": "What is machine learning",
+        "variation_index": 1,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000105",
+      "query": "Tell me about how to optimize web performance",
+      "conversation_id": "similar_conv_003",
+      "category": "similar",
+      "expected_response": "Response for How to optimize web performance",
+      "context_history": [],
+      "similarity_group": "similar_group_003",
+      "metadata": {
+        "base_query": "How to optimize web performance",
+        "variation_index": 4,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000116",
+      "query": "What is machine learning",
+      "conversation_id": "similar_conv_006",
+      "category": "similar",
+      "expected_response": "Response for What is machine learning",
+      "context_history": [],
+      "similarity_group": "similar_group_006",
+      "metadata": {
+        "base_query": "What is machine learning",
+        "variation_index": 0,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000083",
+      "query": "I want to start exercising but don't know where to begin",
+      "conversation_id": "contextual_conv_004",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 1,
+        "total_turns": 3,
+        "conversation_topic": "topic_4"
+      }
+    },
+    {
+      "id": "query_000038",
+      "query": "Do you offer free shipping??",
+      "conversation_id": "repetitive_conv_17",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "Do you offer free shipping?",
+      "metadata": {
+        "template": "Do you offer free shipping?",
+        "variation": 1
+      }
+    },
+    {
+      "id": "query_000149",
+      "query": "I need help with best practices for database design",
+      "conversation_id": "similar_conv_012",
+      "category": "similar",
+      "expected_response": "Response for Best practices for database design",
+      "context_history": [],
+      "similarity_group": "similar_group_012",
+      "metadata": {
+        "base_query": "Best practices for database design",
+        "variation_index": 3,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000119",
+      "query": "I need help with what is machine learning",
+      "conversation_id": "similar_conv_006",
+      "category": "similar",
+      "expected_response": "Response for What is machine learning",
+      "context_history": [],
+      "similarity_group": "similar_group_006",
+      "metadata": {
+        "base_query": "What is machine learning",
+        "variation_index": 3,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000016",
+      "query": "What payment methods do you accept please?",
+      "conversation_id": "repetitive_conv_15",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "What payment methods do you accept?",
+      "metadata": {
+        "template": "What payment methods do you accept?",
+        "variation": 0
+      }
+    },
+    {
+      "id": "query_000045",
+      "query": "I have limited resources and need to achieve optimization strategies while considering data loss - is this possible?",
+      "conversation_id": "novel_conv_f250aad9",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I have {constraint} and need to {objective} while considering {limitation} - is this possible?",
+        "length": 116
+      }
+    },
+    {
+      "id": "query_000026",
+      "query": "Where is your nearest location? Thanks!",
+      "conversation_id": "repetitive_conv_5",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "Where is your nearest location?",
+      "metadata": {
+        "template": "Where is your nearest location?",
+        "variation": 3
+      }
+    },
+    {
+      "id": "query_000015",
+      "query": "Can you tell me what are your business hours?",
+      "conversation_id": "repetitive_conv_14",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "What are your business hours?",
+      "metadata": {
+        "template": "What are your business hours?",
+        "variation": 0
+      }
+    },
+    {
+      "id": "query_000019",
+      "query": "Can you tell me how do i reset my password?",
+      "conversation_id": "repetitive_conv_18",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "How do I reset my password?",
+      "metadata": {
+        "template": "How do I reset my password?",
+        "variation": 3
+      }
+    },
+    {
+      "id": "query_000160",
+      "query": "Tell me about understanding neural networks",
+      "conversation_id": "similar_conv_014",
+      "category": "similar",
+      "expected_response": "Response for Understanding neural networks",
+      "context_history": [],
+      "similarity_group": "similar_group_014",
+      "metadata": {
+        "base_query": "Understanding neural networks",
+        "variation_index": 4,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000074",
+      "query": "I want to learn programming",
+      "conversation_id": "contextual_conv_001",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 1,
+        "total_turns": 3,
+        "conversation_topic": "topic_1"
+      }
+    },
+    {
+      "id": "query_000140",
+      "query": "Tell me about how to install python on windows",
+      "conversation_id": "similar_conv_010",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_010",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 4,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000101",
+      "query": "How to optimize web performance",
+      "conversation_id": "similar_conv_003",
+      "category": "similar",
+      "expected_response": "Response for How to optimize web performance",
+      "context_history": [],
+      "similarity_group": "similar_group_003",
+      "metadata": {
+        "base_query": "How to optimize web performance",
+        "variation_index": 0,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000068",
+      "query": "I'm trying to accomplish best practices but every time I try to optimize, I get encounter cost. Any suggestions for data analysis?",
+      "conversation_id": "novel_conv_2c5c559d",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I'm trying to {goal} but every time I {attempt}, I get {error}. Any suggestions for {context}?",
+        "length": 130
+      }
+    },
+    {
+      "id": "query_000061",
+      "query": "I'm trying to accomplish common pitfalls but every time I try to configure, I get encounter cost. Any suggestions for database management?",
+      "conversation_id": "novel_conv_8b967b1e",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I'm trying to {goal} but every time I {attempt}, I get {error}. Any suggestions for {context}?",
+        "length": 138
+      }
+    },
+    {
+      "id": "query_000070",
+      "query": "I have limited resources and need to achieve implementation details while considering cost - is this possible?",
+      "conversation_id": "novel_conv_ae0ca1a4",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I have {constraint} and need to {objective} while considering {limitation} - is this possible?",
+        "length": 110
+      }
+    },
+    {
+      "id": "query_000152",
+      "query": "Can you explain how to optimize web performance",
+      "conversation_id": "similar_conv_013",
+      "category": "similar",
+      "expected_response": "Response for How to optimize web performance",
+      "context_history": [],
+      "similarity_group": "similar_group_013",
+      "metadata": {
+        "base_query": "How to optimize web performance",
+        "variation_index": 1,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000053",
+      "query": "I have a very specific problem with data analysis involving scalability concerns and performance issues, can you help me understand alternative approaches?",
+      "conversation_id": "novel_conv_abf30cd1",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I have a very specific problem with {topic} involving {detail1} and {detail2}, can you help me understand {aspect}?",
+        "length": 155
+      }
+    },
+    {
+      "id": "query_000135",
+      "query": "Tell me about understanding neural networks",
+      "conversation_id": "similar_conv_009",
+      "category": "similar",
+      "expected_response": "Response for Understanding neural networks",
+      "context_history": [],
+      "similarity_group": "similar_group_009",
+      "metadata": {
+        "base_query": "Understanding neural networks",
+        "variation_index": 4,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000134",
+      "query": "I need help with understanding neural networks",
+      "conversation_id": "similar_conv_009",
+      "category": "similar",
+      "expected_response": "Response for Understanding neural networks",
+      "context_history": [],
+      "similarity_group": "similar_group_009",
+      "metadata": {
+        "base_query": "Understanding neural networks",
+        "variation_index": 3,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000025",
+      "query": "How do I reset my password? Thanks!",
+      "conversation_id": "repetitive_conv_4",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "How do I reset my password?",
+      "metadata": {
+        "template": "How do I reset my password?",
+        "variation": 6
+      }
+    },
+    {
+      "id": "query_000111",
+      "query": "How to install Python on Windows",
+      "conversation_id": "similar_conv_005",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_005",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 0,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000002",
+      "query": "Where is your nearest location??",
+      "conversation_id": "repetitive_conv_1",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "Where is your nearest location?",
+      "metadata": {
+        "template": "Where is your nearest location?",
+        "variation": 0
+      }
+    },
+    {
+      "id": "query_000175",
+      "query": "Tell me about best practices for database design",
+      "conversation_id": "similar_conv_017",
+      "category": "similar",
+      "expected_response": "Response for Best practices for database design",
+      "context_history": [],
+      "similarity_group": "similar_group_017",
+      "metadata": {
+        "base_query": "Best practices for database design",
+        "variation_index": 4,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000077",
+      "query": "How do I improve my presentation skills?",
+      "conversation_id": "contextual_conv_002",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 1,
+        "total_turns": 3,
+        "conversation_topic": "topic_2"
+      }
+    },
+    {
+      "id": "query_000131",
+      "query": "Understanding neural networks",
+      "conversation_id": "similar_conv_009",
+      "category": "similar",
+      "expected_response": "Response for Understanding neural networks",
+      "context_history": [],
+      "similarity_group": "similar_group_009",
+      "metadata": {
+        "base_query": "Understanding neural networks",
+        "variation_index": 0,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000177",
+      "query": "Can you explain how to optimize web performance",
+      "conversation_id": "similar_conv_018",
+      "category": "similar",
+      "expected_response": "Response for How to optimize web performance",
+      "context_history": [],
+      "similarity_group": "similar_group_018",
+      "metadata": {
+        "base_query": "How to optimize web performance",
+        "variation_index": 1,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000034",
+      "query": "What are your business hours please?",
+      "conversation_id": "repetitive_conv_13",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "What are your business hours?",
+      "metadata": {
+        "template": "What are your business hours?",
+        "variation": 2
+      }
+    },
+    {
+      "id": "query_000046",
+      "query": "I have limited resources and need to achieve common pitfalls while considering cost - is this possible?",
+      "conversation_id": "novel_conv_aa5fdfe5",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I have {constraint} and need to {objective} while considering {limitation} - is this possible?",
+        "length": 103
+      }
+    },
+    {
+      "id": "query_000154",
+      "query": "I need help with how to optimize web performance",
+      "conversation_id": "similar_conv_013",
+      "category": "similar",
+      "expected_response": "Response for How to optimize web performance",
+      "context_history": [],
+      "similarity_group": "similar_group_013",
+      "metadata": {
+        "base_query": "How to optimize web performance",
+        "variation_index": 3,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000124",
+      "query": "I need help with best practices for database design",
+      "conversation_id": "similar_conv_007",
+      "category": "similar",
+      "expected_response": "Response for Best practices for database design",
+      "context_history": [],
+      "similarity_group": "similar_group_007",
+      "metadata": {
+        "base_query": "Best practices for database design",
+        "variation_index": 3,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000024",
+      "query": "Can you tell me how do i reset my password?",
+      "conversation_id": "repetitive_conv_3",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "How do I reset my password?",
+      "metadata": {
+        "template": "How do I reset my password?",
+        "variation": 5
+      }
+    },
+    {
+      "id": "query_000176",
+      "query": "How to optimize web performance",
+      "conversation_id": "similar_conv_018",
+      "category": "similar",
+      "expected_response": "Response for How to optimize web performance",
+      "context_history": [],
+      "similarity_group": "similar_group_018",
+      "metadata": {
+        "base_query": "How to optimize web performance",
+        "variation_index": 0,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000162",
+      "query": "Can you explain how to install python on windows",
+      "conversation_id": "similar_conv_015",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_015",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 1,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000128",
+      "query": "How to optimize web performance?",
+      "conversation_id": "similar_conv_008",
+      "category": "similar",
+      "expected_response": "Response for How to optimize web performance",
+      "context_history": [],
+      "similarity_group": "similar_group_008",
+      "metadata": {
+        "base_query": "How to optimize web performance",
+        "variation_index": 2,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000044",
+      "query": "I'm trying to accomplish alternative approaches but every time I try to repair, I get encounter compatibility. Any suggestions for database management?",
+      "conversation_id": "novel_conv_f092e490",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I'm trying to {goal} but every time I {attempt}, I get {error}. Any suggestions for {context}?",
+        "length": 151
+      }
+    },
+    {
+      "id": "query_000049",
+      "query": "I have a very specific problem with software development involving scalability concerns and security requirements, can you help me understand optimization strategies?",
+      "conversation_id": "novel_conv_99f9786a",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I have a very specific problem with {topic} involving {detail1} and {detail2}, can you help me understand {aspect}?",
+        "length": 166
+      }
+    },
+    {
+      "id": "query_000086",
+      "query": "How to install Python on Windows",
+      "conversation_id": "similar_conv_000",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_000",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 0,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000174",
+      "query": "I need help with best practices for database design",
+      "conversation_id": "similar_conv_017",
+      "category": "similar",
+      "expected_response": "Response for Best practices for database design",
+      "context_history": [],
+      "similarity_group": "similar_group_017",
+      "metadata": {
+        "base_query": "Best practices for database design",
+        "variation_index": 3,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000073",
+      "query": "It's running very slowly",
+      "conversation_id": "contextual_conv_000",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [
+        "I need help with my computer",
+        "What seems to be the problem?"
+      ],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 3,
+        "total_turns": 3,
+        "conversation_topic": "topic_0"
+      }
+    },
+    {
+      "id": "query_000103",
+      "query": "How to optimize web performance?",
+      "conversation_id": "similar_conv_003",
+      "category": "similar",
+      "expected_response": "Response for How to optimize web performance",
+      "context_history": [],
+      "similarity_group": "similar_group_003",
+      "metadata": {
+        "base_query": "How to optimize web performance",
+        "variation_index": 2,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000142",
+      "query": "Can you explain what is machine learning",
+      "conversation_id": "similar_conv_011",
+      "category": "similar",
+      "expected_response": "Response for What is machine learning",
+      "context_history": [],
+      "similarity_group": "similar_group_011",
+      "metadata": {
+        "base_query": "What is machine learning",
+        "variation_index": 1,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000166",
+      "query": "What is machine learning",
+      "conversation_id": "similar_conv_016",
+      "category": "similar",
+      "expected_response": "Response for What is machine learning",
+      "context_history": [],
+      "similarity_group": "similar_group_016",
+      "metadata": {
+        "base_query": "What is machine learning",
+        "variation_index": 0,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000036",
+      "query": "Where is your nearest location?",
+      "conversation_id": "repetitive_conv_15",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "Where is your nearest location?",
+      "metadata": {
+        "template": "Where is your nearest location?",
+        "variation": 5
+      }
+    },
+    {
+      "id": "query_000012",
+      "query": "How do I contact customer service??",
+      "conversation_id": "repetitive_conv_11",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "How do I contact customer service?",
+      "metadata": {
+        "template": "How do I contact customer service?",
+        "variation": 1
+      }
+    },
+    {
+      "id": "query_000032",
+      "query": "How do I contact customer service please?",
+      "conversation_id": "repetitive_conv_11",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "How do I contact customer service?",
+      "metadata": {
+        "template": "How do I contact customer service?",
+        "variation": 2
+      }
+    },
+    {
+      "id": "query_000147",
+      "query": "Can you explain best practices for database design",
+      "conversation_id": "similar_conv_012",
+      "category": "similar",
+      "expected_response": "Response for Best practices for database design",
+      "context_history": [],
+      "similarity_group": "similar_group_012",
+      "metadata": {
+        "base_query": "Best practices for database design",
+        "variation_index": 1,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000127",
+      "query": "Can you explain how to optimize web performance",
+      "conversation_id": "similar_conv_008",
+      "category": "similar",
+      "expected_response": "Response for How to optimize web performance",
+      "context_history": [],
+      "similarity_group": "similar_group_008",
+      "metadata": {
+        "base_query": "How to optimize web performance",
+        "variation_index": 1,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000076",
+      "query": "I'm thinking about Python",
+      "conversation_id": "contextual_conv_001",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [
+        "I want to learn programming",
+        "What programming language interests you?"
+      ],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 3,
+        "total_turns": 3,
+        "conversation_topic": "topic_1"
+      }
+    },
+    {
+      "id": "query_000112",
+      "query": "Can you explain how to install python on windows",
+      "conversation_id": "similar_conv_005",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_005",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 1,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000114",
+      "query": "I need help with how to install python on windows",
+      "conversation_id": "similar_conv_005",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_005",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 3,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000060",
+      "query": "I'm trying to accomplish common pitfalls but every time I try to repair, I get encounter compatibility. Any suggestions for machine learning?",
+      "conversation_id": "novel_conv_68acb740",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I'm trying to {goal} but every time I {attempt}, I get {error}. Any suggestions for {context}?",
+        "length": 141
+      }
+    },
+    {
+      "id": "query_000158",
+      "query": "Understanding neural networks?",
+      "conversation_id": "similar_conv_014",
+      "category": "similar",
+      "expected_response": "Response for Understanding neural networks",
+      "context_history": [],
+      "similarity_group": "similar_group_014",
+      "metadata": {
+        "base_query": "Understanding neural networks",
+        "variation_index": 2,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000100",
+      "query": "Tell me about best practices for database design",
+      "conversation_id": "similar_conv_002",
+      "category": "similar",
+      "expected_response": "Response for Best practices for database design",
+      "context_history": [],
+      "similarity_group": "similar_group_002",
+      "metadata": {
+        "base_query": "Best practices for database design",
+        "variation_index": 4,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000069",
+      "query": "Can you explain the relationship between machine learning and common pitfalls specifically in the context of scalability concerns?",
+      "conversation_id": "novel_conv_4ce973fb",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "Can you explain the relationship between {concept1} and {concept2} specifically in the context of {scenario}?",
+        "length": 130
+      }
+    },
+    {
+      "id": "query_000104",
+      "query": "I need help with how to optimize web performance",
+      "conversation_id": "similar_conv_003",
+      "category": "similar",
+      "expected_response": "Response for How to optimize web performance",
+      "context_history": [],
+      "similarity_group": "similar_group_003",
+      "metadata": {
+        "base_query": "How to optimize web performance",
+        "variation_index": 3,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000079",
+      "query": "I get really nervous and forget what to say",
+      "conversation_id": "contextual_conv_002",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [
+        "How do I improve my presentation skills?",
+        "What aspect would you like to focus on?"
+      ],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 3,
+        "total_turns": 3,
+        "conversation_topic": "topic_2"
+      }
+    },
+    {
+      "id": "query_000035",
+      "query": "What payment methods do you accept??",
+      "conversation_id": "repetitive_conv_14",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "What payment methods do you accept?",
+      "metadata": {
+        "template": "What payment methods do you accept?",
+        "variation": 4
+      }
+    },
+    {
+      "id": "query_000178",
+      "query": "How to optimize web performance?",
+      "conversation_id": "similar_conv_018",
+      "category": "similar",
+      "expected_response": "Response for How to optimize web performance",
+      "context_history": [],
+      "similarity_group": "similar_group_018",
+      "metadata": {
+        "base_query": "How to optimize web performance",
+        "variation_index": 2,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000183",
+      "query": "Understanding neural networks?",
+      "conversation_id": "similar_conv_019",
+      "category": "similar",
+      "expected_response": "Response for Understanding neural networks",
+      "context_history": [],
+      "similarity_group": "similar_group_019",
+      "metadata": {
+        "base_query": "Understanding neural networks",
+        "variation_index": 2,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000094",
+      "query": "I need help with what is machine learning",
+      "conversation_id": "similar_conv_001",
+      "category": "similar",
+      "expected_response": "Response for What is machine learning",
+      "context_history": [],
+      "similarity_group": "similar_group_001",
+      "metadata": {
+        "base_query": "What is machine learning",
+        "variation_index": 3,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000023",
+      "query": "What is your return policy? Thanks!",
+      "conversation_id": "repetitive_conv_2",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "What is your return policy?",
+      "metadata": {
+        "template": "What is your return policy?",
+        "variation": 1
+      }
+    },
+    {
+      "id": "query_000156",
+      "query": "Understanding neural networks",
+      "conversation_id": "similar_conv_014",
+      "category": "similar",
+      "expected_response": "Response for Understanding neural networks",
+      "context_history": [],
+      "similarity_group": "similar_group_014",
+      "metadata": {
+        "base_query": "Understanding neural networks",
+        "variation_index": 0,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000169",
+      "query": "I need help with what is machine learning",
+      "conversation_id": "similar_conv_016",
+      "category": "similar",
+      "expected_response": "Response for What is machine learning",
+      "context_history": [],
+      "similarity_group": "similar_group_016",
+      "metadata": {
+        "base_query": "What is machine learning",
+        "variation_index": 3,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000091",
+      "query": "What is machine learning",
+      "conversation_id": "similar_conv_001",
+      "category": "similar",
+      "expected_response": "Response for What is machine learning",
+      "context_history": [],
+      "similarity_group": "similar_group_001",
+      "metadata": {
+        "base_query": "What is machine learning",
+        "variation_index": 0,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000059",
+      "query": "My application broke and I need to configure it but I'm not sure about cost - what should I do?",
+      "conversation_id": "novel_conv_8598797b",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "My {item} broke and I need to {action} it but I'm not sure about {concern} - what should I do?",
+        "length": 95
+      }
+    },
+    {
+      "id": "query_000107",
+      "query": "Can you explain understanding neural networks",
+      "conversation_id": "similar_conv_004",
+      "category": "similar",
+      "expected_response": "Response for Understanding neural networks",
+      "context_history": [],
+      "similarity_group": "similar_group_004",
+      "metadata": {
+        "base_query": "Understanding neural networks",
+        "variation_index": 1,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000115",
+      "query": "Tell me about how to install python on windows",
+      "conversation_id": "similar_conv_005",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_005",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 4,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000082",
+      "query": "France, Italy, and Spain",
+      "conversation_id": "contextual_conv_003",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [
+        "I'm planning a trip to Europe",
+        "Which countries are you considering?"
+      ],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 3,
+        "total_turns": 3,
+        "conversation_topic": "topic_3"
+      }
+    },
+    {
+      "id": "query_000185",
+      "query": "Tell me about understanding neural networks",
+      "conversation_id": "similar_conv_019",
+      "category": "similar",
+      "expected_response": "Response for Understanding neural networks",
+      "context_history": [],
+      "similarity_group": "similar_group_019",
+      "metadata": {
+        "base_query": "Understanding neural networks",
+        "variation_index": 4,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000153",
+      "query": "How to optimize web performance?",
+      "conversation_id": "similar_conv_013",
+      "category": "similar",
+      "expected_response": "Response for How to optimize web performance",
+      "context_history": [],
+      "similarity_group": "similar_group_013",
+      "metadata": {
+        "base_query": "How to optimize web performance",
+        "variation_index": 2,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000168",
+      "query": "What is machine learning?",
+      "conversation_id": "similar_conv_016",
+      "category": "similar",
+      "expected_response": "Response for What is machine learning",
+      "context_history": [],
+      "similarity_group": "similar_group_016",
+      "metadata": {
+        "base_query": "What is machine learning",
+        "variation_index": 2,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000138",
+      "query": "How to install Python on Windows?",
+      "conversation_id": "similar_conv_010",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_010",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 2,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000106",
+      "query": "Understanding neural networks",
+      "conversation_id": "similar_conv_004",
+      "category": "similar",
+      "expected_response": "Response for Understanding neural networks",
+      "context_history": [],
+      "similarity_group": "similar_group_004",
+      "metadata": {
+        "base_query": "Understanding neural networks",
+        "variation_index": 0,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000054",
+      "query": "I'm trying to accomplish implementation details but every time I try to repair, I get encounter cost. Any suggestions for database management?",
+      "conversation_id": "novel_conv_040c80e9",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I'm trying to {goal} but every time I {attempt}, I get {error}. Any suggestions for {context}?",
+        "length": 142
+      }
+    },
+    {
+      "id": "query_000109",
+      "query": "I need help with understanding neural networks",
+      "conversation_id": "similar_conv_004",
+      "category": "similar",
+      "expected_response": "Response for Understanding neural networks",
+      "context_history": [],
+      "similarity_group": "similar_group_004",
+      "metadata": {
+        "base_query": "Understanding neural networks",
+        "variation_index": 3,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000004",
+      "query": "How do I reset my password? Thanks!",
+      "conversation_id": "repetitive_conv_3",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "How do I reset my password?",
+      "metadata": {
+        "template": "How do I reset my password?",
+        "variation": 1
+      }
+    },
+    {
+      "id": "query_000088",
+      "query": "How to install Python on Windows?",
+      "conversation_id": "similar_conv_000",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_000",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 2,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000165",
+      "query": "Tell me about how to install python on windows",
+      "conversation_id": "similar_conv_015",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_015",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 4,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000150",
+      "query": "Tell me about best practices for database design",
+      "conversation_id": "similar_conv_012",
+      "category": "similar",
+      "expected_response": "Response for Best practices for database design",
+      "context_history": [],
+      "similarity_group": "similar_group_012",
+      "metadata": {
+        "base_query": "Best practices for database design",
+        "variation_index": 4,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000110",
+      "query": "Tell me about understanding neural networks",
+      "conversation_id": "similar_conv_004",
+      "category": "similar",
+      "expected_response": "Response for Understanding neural networks",
+      "context_history": [],
+      "similarity_group": "similar_group_004",
+      "metadata": {
+        "base_query": "Understanding neural networks",
+        "variation_index": 4,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000089",
+      "query": "I need help with how to install python on windows",
+      "conversation_id": "similar_conv_000",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_000",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 3,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000164",
+      "query": "I need help with how to install python on windows",
+      "conversation_id": "similar_conv_015",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_015",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 3,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000031",
+      "query": "Can you help me with my order?",
+      "conversation_id": "repetitive_conv_10",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "Can you help me with my order?",
+      "metadata": {
+        "template": "Can you help me with my order?",
+        "variation": 4
+      }
+    },
+    {
+      "id": "query_000078",
+      "query": "What aspect would you like to focus on?",
+      "conversation_id": "contextual_conv_002",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [
+        "How do I improve my presentation skills?"
+      ],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 2,
+        "total_turns": 3,
+        "conversation_topic": "topic_2"
+      }
+    },
+    {
+      "id": "query_000027",
+      "query": "What payment methods do you accept? Thanks!",
+      "conversation_id": "repetitive_conv_6",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "What payment methods do you accept?",
+      "metadata": {
+        "template": "What payment methods do you accept?",
+        "variation": 3
+      }
+    },
+    {
+      "id": "query_000063",
+      "query": "Can you explain the relationship between database management and implementation details specifically in the context of security requirements?",
+      "conversation_id": "novel_conv_6709d64c",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "Can you explain the relationship between {concept1} and {concept2} specifically in the context of {scenario}?",
+        "length": 141
+      }
+    },
+    {
+      "id": "query_000020",
+      "query": "How do I reset my password please?",
+      "conversation_id": "repetitive_conv_19",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "How do I reset my password?",
+      "metadata": {
+        "template": "How do I reset my password?",
+        "variation": 4
+      }
+    },
+    {
+      "id": "query_000051",
+      "query": "Can you explain the relationship between database management and optimization strategies specifically in the context of memory constraints?",
+      "conversation_id": "novel_conv_2115acae",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "Can you explain the relationship between {concept1} and {concept2} specifically in the context of {scenario}?",
+        "length": 139
+      }
+    },
+    {
+      "id": "query_000102",
+      "query": "Can you explain how to optimize web performance",
+      "conversation_id": "similar_conv_003",
+      "category": "similar",
+      "expected_response": "Response for How to optimize web performance",
+      "context_history": [],
+      "similarity_group": "similar_group_003",
+      "metadata": {
+        "base_query": "How to optimize web performance",
+        "variation_index": 1,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000097",
+      "query": "Can you explain best practices for database design",
+      "conversation_id": "similar_conv_002",
+      "category": "similar",
+      "expected_response": "Response for Best practices for database design",
+      "context_history": [],
+      "similarity_group": "similar_group_002",
+      "metadata": {
+        "base_query": "Best practices for database design",
+        "variation_index": 1,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000146",
+      "query": "Best practices for database design",
+      "conversation_id": "similar_conv_012",
+      "category": "similar",
+      "expected_response": "Response for Best practices for database design",
+      "context_history": [],
+      "similarity_group": "similar_group_012",
+      "metadata": {
+        "base_query": "Best practices for database design",
+        "variation_index": 0,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000007",
+      "query": "What is the weather today?",
+      "conversation_id": "repetitive_conv_6",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "What is the weather today?",
+      "metadata": {
+        "template": "What is the weather today?",
+        "variation": 0
+      }
+    },
+    {
+      "id": "query_000028",
+      "query": "Can you help me with my order?",
+      "conversation_id": "repetitive_conv_7",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "Can you help me with my order?",
+      "metadata": {
+        "template": "Can you help me with my order?",
+        "variation": 3
+      }
+    },
+    {
+      "id": "query_000080",
+      "query": "I'm planning a trip to Europe",
+      "conversation_id": "contextual_conv_003",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 1,
+        "total_turns": 3,
+        "conversation_topic": "topic_3"
+      }
+    },
+    {
+      "id": "query_000042",
+      "query": "I'm trying to accomplish alternative approaches but every time I try to troubleshoot, I get encounter compatibility. Any suggestions for data analysis?",
+      "conversation_id": "novel_conv_b6851013",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I'm trying to {goal} but every time I {attempt}, I get {error}. Any suggestions for {context}?",
+        "length": 151
+      }
+    },
+    {
+      "id": "query_000155",
+      "query": "Tell me about how to optimize web performance",
+      "conversation_id": "similar_conv_013",
+      "category": "similar",
+      "expected_response": "Response for How to optimize web performance",
+      "context_history": [],
+      "similarity_group": "similar_group_013",
+      "metadata": {
+        "base_query": "How to optimize web performance",
+        "variation_index": 4,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000043",
+      "query": "My network broke and I need to troubleshoot it but I'm not sure about complexity - what should I do?",
+      "conversation_id": "novel_conv_79927d4a",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "My {item} broke and I need to {action} it but I'm not sure about {concern} - what should I do?",
+        "length": 100
+      }
+    },
+    {
+      "id": "query_000095",
+      "query": "Tell me about what is machine learning",
+      "conversation_id": "similar_conv_001",
+      "category": "similar",
+      "expected_response": "Response for What is machine learning",
+      "context_history": [],
+      "similarity_group": "similar_group_001",
+      "metadata": {
+        "base_query": "What is machine learning",
+        "variation_index": 4,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000066",
+      "query": "I have a very specific problem with software development involving scalability concerns and memory constraints, can you help me understand best practices?",
+      "conversation_id": "novel_conv_7b901ed1",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I have a very specific problem with {topic} involving {detail1} and {detail2}, can you help me understand {aspect}?",
+        "length": 154
+      }
+    },
+    {
+      "id": "query_000120",
+      "query": "Tell me about what is machine learning",
+      "conversation_id": "similar_conv_006",
+      "category": "similar",
+      "expected_response": "Response for What is machine learning",
+      "context_history": [],
+      "similarity_group": "similar_group_006",
+      "metadata": {
+        "base_query": "What is machine learning",
+        "variation_index": 4,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000056",
+      "query": "I'm trying to accomplish best practices but every time I try to configure, I get encounter downtime. Any suggestions for machine learning?",
+      "conversation_id": "novel_conv_187014d9",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I'm trying to {goal} but every time I {attempt}, I get {error}. Any suggestions for {context}?",
+        "length": 138
+      }
+    },
+    {
+      "id": "query_000145",
+      "query": "Tell me about what is machine learning",
+      "conversation_id": "similar_conv_011",
+      "category": "similar",
+      "expected_response": "Response for What is machine learning",
+      "context_history": [],
+      "similarity_group": "similar_group_011",
+      "metadata": {
+        "base_query": "What is machine learning",
+        "variation_index": 4,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000030",
+      "query": "Where is your nearest location?",
+      "conversation_id": "repetitive_conv_9",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "Where is your nearest location?",
+      "metadata": {
+        "template": "Where is your nearest location?",
+        "variation": 4
+      }
+    },
+    {
+      "id": "query_000122",
+      "query": "Can you explain best practices for database design",
+      "conversation_id": "similar_conv_007",
+      "category": "similar",
+      "expected_response": "Response for Best practices for database design",
+      "context_history": [],
+      "similarity_group": "similar_group_007",
+      "metadata": {
+        "base_query": "Best practices for database design",
+        "variation_index": 1,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000033",
+      "query": "What is your return policy please?",
+      "conversation_id": "repetitive_conv_12",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "What is your return policy?",
+      "metadata": {
+        "template": "What is your return policy?",
+        "variation": 2
+      }
+    },
+    {
+      "id": "query_000062",
+      "query": "I have a very specific problem with web design involving performance issues and user experience, can you help me understand alternative approaches?",
+      "conversation_id": "novel_conv_cf1ba1a9",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I have a very specific problem with {topic} involving {detail1} and {detail2}, can you help me understand {aspect}?",
+        "length": 147
+      }
+    },
+    {
+      "id": "query_000040",
+      "query": "How do I contact customer service please?",
+      "conversation_id": "repetitive_conv_19",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "How do I contact customer service?",
+      "metadata": {
+        "template": "How do I contact customer service?",
+        "variation": 3
+      }
+    },
+    {
+      "id": "query_000006",
+      "query": "How do I contact customer service?",
+      "conversation_id": "repetitive_conv_5",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "How do I contact customer service?",
+      "metadata": {
+        "template": "How do I contact customer service?",
+        "variation": 0
+      }
+    },
+    {
+      "id": "query_000052",
+      "query": "I have a very specific problem with database management involving user experience and performance issues, can you help me understand common pitfalls?",
+      "conversation_id": "novel_conv_d123c7b0",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I have a very specific problem with {topic} involving {detail1} and {detail2}, can you help me understand {aspect}?",
+        "length": 149
+      }
+    },
+    {
+      "id": "query_000064",
+      "query": "I have limited time and need to achieve best practices while considering compatibility - is this possible?",
+      "conversation_id": "novel_conv_0d498721",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I have {constraint} and need to {objective} while considering {limitation} - is this possible?",
+        "length": 106
+      }
+    },
+    {
+      "id": "query_000008",
+      "query": "Can you help me with my order??",
+      "conversation_id": "repetitive_conv_7",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "Can you help me with my order?",
+      "metadata": {
+        "template": "Can you help me with my order?",
+        "variation": 1
+      }
+    },
+    {
+      "id": "query_000011",
+      "query": "Can you help me with my order? Thanks!",
+      "conversation_id": "repetitive_conv_10",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "Can you help me with my order?",
+      "metadata": {
+        "template": "Can you help me with my order?",
+        "variation": 2
+      }
+    },
+    {
+      "id": "query_000018",
+      "query": "What payment methods do you accept?",
+      "conversation_id": "repetitive_conv_17",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "What payment methods do you accept?",
+      "metadata": {
+        "template": "What payment methods do you accept?",
+        "variation": 1
+      }
+    },
+    {
+      "id": "query_000058",
+      "query": "I have limited budget and need to achieve alternative approaches while considering downtime - is this possible?",
+      "conversation_id": "novel_conv_827e9382",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I have {constraint} and need to {objective} while considering {limitation} - is this possible?",
+        "length": 111
+      }
+    },
+    {
+      "id": "query_000090",
+      "query": "Tell me about how to install python on windows",
+      "conversation_id": "similar_conv_000",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_000",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 4,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000014",
+      "query": "Where is your nearest location?",
+      "conversation_id": "repetitive_conv_13",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "Where is your nearest location?",
+      "metadata": {
+        "template": "Where is your nearest location?",
+        "variation": 1
+      }
+    },
+    {
+      "id": "query_000139",
+      "query": "I need help with how to install python on windows",
+      "conversation_id": "similar_conv_010",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_010",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 3,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000005",
+      "query": "How do I reset my password? Thanks!",
+      "conversation_id": "repetitive_conv_4",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "How do I reset my password?",
+      "metadata": {
+        "template": "How do I reset my password?",
+        "variation": 2
+      }
+    },
+    {
+      "id": "query_000121",
+      "query": "Best practices for database design",
+      "conversation_id": "similar_conv_007",
+      "category": "similar",
+      "expected_response": "Response for Best practices for database design",
+      "context_history": [],
+      "similarity_group": "similar_group_007",
+      "metadata": {
+        "base_query": "Best practices for database design",
+        "variation_index": 0,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000021",
+      "query": "What payment methods do you accept? Thanks!",
+      "conversation_id": "repetitive_conv_0",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "What payment methods do you accept?",
+      "metadata": {
+        "template": "What payment methods do you accept?",
+        "variation": 2
+      }
+    },
+    {
+      "id": "query_000065",
+      "query": "My application broke and I need to troubleshoot it but I'm not sure about complexity - what should I do?",
+      "conversation_id": "novel_conv_29c41027",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "My {item} broke and I need to {action} it but I'm not sure about {concern} - what should I do?",
+        "length": 104
+      }
+    },
+    {
+      "id": "query_000108",
+      "query": "Understanding neural networks?",
+      "conversation_id": "similar_conv_004",
+      "category": "similar",
+      "expected_response": "Response for Understanding neural networks",
+      "context_history": [],
+      "similarity_group": "similar_group_004",
+      "metadata": {
+        "base_query": "Understanding neural networks",
+        "variation_index": 2,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000072",
+      "query": "What seems to be the problem?",
+      "conversation_id": "contextual_conv_000",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [
+        "I need help with my computer"
+      ],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 2,
+        "total_turns": 3,
+        "conversation_topic": "topic_0"
+      }
+    },
+    {
+      "id": "query_000182",
+      "query": "Can you explain understanding neural networks",
+      "conversation_id": "similar_conv_019",
+      "category": "similar",
+      "expected_response": "Response for Understanding neural networks",
+      "context_history": [],
+      "similarity_group": "similar_group_019",
+      "metadata": {
+        "base_query": "Understanding neural networks",
+        "variation_index": 1,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000087",
+      "query": "Can you explain how to install python on windows",
+      "conversation_id": "similar_conv_000",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_000",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 1,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000181",
+      "query": "Understanding neural networks",
+      "conversation_id": "similar_conv_019",
+      "category": "similar",
+      "expected_response": "Response for Understanding neural networks",
+      "context_history": [],
+      "similarity_group": "similar_group_019",
+      "metadata": {
+        "base_query": "Understanding neural networks",
+        "variation_index": 0,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000117",
+      "query": "Can you explain what is machine learning",
+      "conversation_id": "similar_conv_006",
+      "category": "similar",
+      "expected_response": "Response for What is machine learning",
+      "context_history": [],
+      "similarity_group": "similar_group_006",
+      "metadata": {
+        "base_query": "What is machine learning",
+        "variation_index": 1,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000055",
+      "query": "I'm trying to accomplish optimization strategies but every time I try to upgrade, I get encounter compatibility. Any suggestions for database management?",
+      "conversation_id": "novel_conv_4d0ad015",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I'm trying to {goal} but every time I {attempt}, I get {error}. Any suggestions for {context}?",
+        "length": 153
+      }
+    },
+    {
+      "id": "query_000084",
+      "query": "What are your fitness goals?",
+      "conversation_id": "contextual_conv_004",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [
+        "I want to start exercising but don't know where to begin"
+      ],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 2,
+        "total_turns": 3,
+        "conversation_topic": "topic_4"
+      }
+    },
+    {
+      "id": "query_000098",
+      "query": "Best practices for database design?",
+      "conversation_id": "similar_conv_002",
+      "category": "similar",
+      "expected_response": "Response for Best practices for database design",
+      "context_history": [],
+      "similarity_group": "similar_group_002",
+      "metadata": {
+        "base_query": "Best practices for database design",
+        "variation_index": 2,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000067",
+      "query": "Can you explain the relationship between database management and optimization strategies specifically in the context of memory constraints?",
+      "conversation_id": "novel_conv_58c6e059",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "Can you explain the relationship between {concept1} and {concept2} specifically in the context of {scenario}?",
+        "length": 139
+      }
+    },
+    {
+      "id": "query_000013",
+      "query": "What is your return policy? Thanks!",
+      "conversation_id": "repetitive_conv_12",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "What is your return policy?",
+      "metadata": {
+        "template": "What is your return policy?",
+        "variation": 0
+      }
+    },
+    {
+      "id": "query_000047",
+      "query": "I have limited resources and need to achieve implementation details while considering downtime - is this possible?",
+      "conversation_id": "novel_conv_b78cf81b",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I have {constraint} and need to {objective} while considering {limitation} - is this possible?",
+        "length": 114
+      }
+    }
+  ]
+}

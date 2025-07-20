@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  enhanced-gptcache:
+    build: 
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: enhanced-gptcache
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./config.yaml:/app/config.yaml
+      - ./src:/app/src
+      - ./benchmark:/app/benchmark
+      - ./tests:/app/tests
+    environment:
+      - PYTHONPATH=/app
+      - CACHE_SIZE_MB=100
+      - CONTEXT_ENABLED=true
+      - PCA_ENABLED=true
+      - FEDERATED_ENABLED=true
+    working_dir: /app
+    command: --help
+
+  # Development service with live code reloading
+  dev:
+    build: 
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: enhanced-gptcache-dev
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONPATH=/app
+      - DEVELOPMENT=true
+    working_dir: /app
+    command: shell
+    stdin_open: true
+    tty: true
+
+  # Test service
+  test:
+    build: 
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: enhanced-gptcache-test
+    volumes:
+      - ./src:/app/src
+      - ./tests:/app/tests
+      - ./config.yaml:/app/config.yaml
+    environment:
+      - PYTHONPATH=/app
+      - TESTING=true
+    working_dir: /app
+    command: test
+
+  # Benchmark service
+  benchmark:
+    build: 
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: enhanced-gptcache-benchmark
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./src:/app/src
+      - ./benchmark:/app/benchmark
+      - ./config.yaml:/app/config.yaml
+    environment:
+      - PYTHONPATH=/app
+      - BENCHMARK_OUTPUT_DIR=/app/data/results
+    working_dir: /app
+    command: generate-queries --output data/queries.json --count 100
