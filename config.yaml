@@ -14,7 +14,7 @@ context:
 pca:
   enabled: true
   target_dimensions: 128
-  training_samples: 1000
+  training_samples: 20
   model_path: models/pca_model.pkl
   compression_threshold: 100
 

@@ -199,12 +199,8 @@ class ContextAwareSimilarity(SimilarityEvaluation):
             print(f"Context similarity evaluation failed: {e}")
             return self._base_similarity(src_dict, cache_dict, **kwargs)
     
-    def range(self) -> Tuple[float, float]:
-        """Return the range of similarity scores (required by GPTCache interface).
-        
-        Returns:
-            Tuple[float, float]: (minimum_score, maximum_score)
-        """
+    def range(self):
+        """Return the range of similarity scores (required by GPTCache interface)."""
         return (0.0, 1.0)
     
     def _base_similarity(
