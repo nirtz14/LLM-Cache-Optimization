@@ -5,14 +5,14 @@ Quick verification script to test Enhanced GPTCache setup.
 import sys
 import os
 
+# Add current directory to path at module level
+sys.path.insert(0, os.getcwd())
+
 def test_imports():
     """Test that all modules can be imported."""
     print("🔍 Testing module imports...")
     
     try:
-        # Add current directory to path
-        sys.path.insert(0, os.getcwd())
-        
         from src.utils.config import get_config
         print("✅ Config module imported successfully")
         
@@ -42,6 +42,10 @@ def test_basic_functionality():
     print("\n🧪 Testing basic functionality...")
     
     try:
+        # Import at function level to ensure availability
+        from src.utils.config import get_config
+        from src.utils.metrics import get_performance_tracker, record_cache_request
+        
         # Test configuration loading
         config = get_config()
         print(f"✅ Configuration loaded: cache.similarity_threshold = {config.cache.similarity_threshold}")
@@ -51,7 +55,6 @@ def test_basic_functionality():
         print("✅ Performance tracker initialized")
         
         # Test metrics recording (without actual cache operations)
-        from src.utils.metrics import record_cache_request
         record_cache_request("test query", 10.5, True)
         stats = tracker.get_current_stats()
         print(f"✅ Metrics recording works: {stats.total_requests} requests tracked")
@@ -102,31 +105,21 @@ def main():
     total = len(tests)
     
     for test_name, test_func in tests:
-        try:
-            if test_func():
-                print(f"✅ {test_name}: PASSED")
-                passed += 1
-            else:
-                print(f"❌ {test_name}: FAILED")
-        except Exception as e:
-            print(f"❌ {test_name}: FAILED with exception: {e}")
+        if test_func():
+            print(f"✅ {test_name}: PASSED")
+            passed += 1
+        else:
+            print(f"❌ {test_name}: FAILED")
     
     print("\n" + "=" * 50)
     print(f"VERIFICATION SUMMARY: {passed}/{total} tests passed")
     
     if passed == total:
-        print("🎉 All tests passed! Enhanced GPTCache is ready to use.")
-        print("\nNext steps:")
-        print("1. Run full demo: python demo.py")
-        print("2. Generate queries: python -m benchmark.generate_queries --output data/queries.json --count 100")
-        print("3. Run benchmarks: python -m benchmark.benchmark_runner --queries data/queries.json")
-        print("4. Or use Docker: docker compose run enhanced-gptcache benchmark")
-        
+        print("🎉 All tests passed! Setup is working correctly.")
         return True
     else:
         print("⚠️  Some tests failed. Check error messages above.")
         print("Try installing missing dependencies or use Docker for guaranteed compatibility.")
-        
         return False
 
 if __name__ == "__main__":

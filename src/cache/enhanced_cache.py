@@ -1,18 +1,21 @@
-"""Simple working cache implementation using verified GPTCache APIs."""
+"""Fixed Enhanced Cache with proper GPTCache initialization."""
 import time
 import json
 from typing import Optional, Any, Dict
-from sentence_transformers import SentenceTransformer
 import numpy as np
 
+# Proper GPTCache imports and initialization
+from gptcache import cache, Config
 from gptcache.embedding import SBERT
-from gptcache.manager import get_data_manager
+from gptcache.manager import get_data_manager, CacheBase, VectorBase, ObjectBase
+from gptcache.similarity_evaluation import SearchDistanceEvaluation
+from gptcache.processor.pre import get_prompt
 
 from ..utils.config import get_config
 from ..utils.metrics import get_performance_tracker, BenchmarkTimer, record_cache_request
 
 class EnhancedCache:
-    """Enhanced GPTCache that actually works."""
+    """Enhanced GPTCache with proper initialization."""
     
     def __init__(
         self,
@@ -21,7 +24,7 @@ class EnhancedCache:
         enable_pca: bool = True,
         enable_tau: bool = True,
     ):
-        """Initialize enhanced cache."""
+        """Initialize enhanced cache with proper GPTCache setup."""
         self.config = get_config()
         self.embedding_model_name = embedding_model or self.config.context.embedding_model
         
@@ -30,109 +33,106 @@ class EnhancedCache:
         self.enable_pca = enable_pca
         self.enable_tau = enable_tau
         
-        # Initialize GPTCache components
-        self.gptcache_embedding = SBERT(self.embedding_model_name)
-        self.data_manager = get_data_manager()
+        # Initialize GPTCache properly
+        self._initialize_gptcache()
         
-        # Initialize PCA compression if enabled
-        self.pca_wrapper = None
-        if self.enable_pca:
-            from ..core.pca_wrapper import PCAEmbeddingWrapper
-            base_func = lambda text: self.gptcache_embedding.to_embeddings(text)
-            self.pca_wrapper = PCAEmbeddingWrapper(
-                base_embedding_func=base_func,
-                target_dimensions=self.config.pca.target_dimensions,
-                model_path=self.config.pca.model_path
-            )
-        
-        # Initialize context similarity if enabled
-        self.context_similarity = None
-        if self.enable_context:
-            from ..core.context_similarity import ContextAwareSimilarity
-            from gptcache.similarity_evaluation import SearchDistanceEvaluation
-            base_similarity = SearchDistanceEvaluation()
-            
-            self.context_similarity = ContextAwareSimilarity(
-                embedding_model=self.embedding_model_name,
-                context_window_size=self.config.context.window_size,
-                divergence_threshold=self.config.context.divergence_threshold,
-                base_similarity_func=base_similarity,
-            )
-        
-        # Initialize τ-manager if enabled
-        self.tau_manager = None
-        if self.enable_tau:
-            from ..core.tau_manager import TauManager
-            self.tau_manager = TauManager()
+        # Initialize enhanced features
+        self._initialize_enhanced_features()
         
         # Statistics
         self.total_queries = 0
         self.cache_hits = 0
         self.cache_misses = 0
         
-    def _embedding_to_string(self, embedding) -> str:
-        """Convert numpy embedding to hashable string."""
-        if hasattr(embedding, 'tolist'):
-            return json.dumps(embedding.tolist())
-        return json.dumps(embedding)
+    def _initialize_gptcache(self):
+        """Properly initialize GPTCache components."""
+        try:
+            # Initialize embedding function
+            self.gptcache_embedding = SBERT(self.embedding_model_name)
+            
+            # Initialize similarity evaluation
+            self.similarity_evaluation = SearchDistanceEvaluation()
+            
+            # Initialize data manager with proper configuration
+            self.data_manager = get_data_manager(
+                CacheBase("sqlite"),  # Use SQLite for persistence
+                VectorBase("faiss", dimension=384),  # FAISS for vector storage
+                ObjectBase("local")  # Local object storage
+            )
+            
+            # Initialize GPTCache configuration
+            cache_config = Config(
+                similarity_threshold=self.config.cache.similarity_threshold,
+                data_manager=self.data_manager,
+                embedding_func=self.gptcache_embedding.to_embeddings,
+                similarity_evaluation=self.similarity_evaluation,
+                pre_embedding_func=get_prompt
+            )
+            
+            # Initialize the cache
+            cache.init(
+                pre_embedding_func=get_prompt,
+                embedding_func=self.gptcache_embedding.to_embeddings,
+                data_manager=self.data_manager,
+                similarity_evaluation=self.similarity_evaluation,
+                config=cache_config
+            )
+            
+        except Exception as e:
+            print(f"GPTCache initialization error: {e}")
+            # Fallback to simple in-memory storage
+            self._initialize_fallback_cache()
     
-    def _string_to_embedding(self, embedding_str: str):
-        """Convert string back to numpy array."""
-        return np.array(json.loads(embedding_str))
-    
-    def _cosine_similarity(self, emb1, emb2):
-        """Compute cosine similarity between two embeddings."""
-        emb1 = np.array(emb1)
-        emb2 = np.array(emb2)
-        return np.dot(emb1, emb2) / (np.linalg.norm(emb1) * np.linalg.norm(emb2))
-    
-    def _search_with_similarity(self, query_embedding, query: str, threshold: float = 0.8):
-        """Search and apply similarity evaluation."""
-        query_emb_array = np.array(query_embedding)
-        best_match = None
-        best_score = 0.0
+    def _initialize_fallback_cache(self):
+        """Initialize a simple fallback cache if GPTCache fails."""
+        print("Using fallback in-memory cache...")
+        self.fallback_cache = {}
+        self.gptcache_embedding = SBERT(self.embedding_model_name)
+        self.data_manager = None
+        self.use_fallback = True
         
-        # Search through stored data
-        for stored_embedding_str, stored_data in self.data_manager.data.items():
-            if stored_embedding_str == 'fake_embedding_string':  # Skip test data
-                continue
-                
+    def _initialize_enhanced_features(self):
+        """Initialize PCA, context similarity, and tau manager."""
+        # Initialize PCA compression if enabled
+        self.pca_wrapper = None
+        if self.enable_pca:
             try:
-                # Convert stored embedding back to array
-                stored_embedding = self._string_to_embedding(stored_embedding_str)
-                
-                # Handle dimension mismatch (e.g., if PCA was trained after some data was stored)
-                if query_emb_array.shape != stored_embedding.shape:
-                    # If we have PCA and stored embedding is larger, try to compress stored embedding
-                    if (self.enable_pca and self.pca_wrapper and 
-                        self.pca_wrapper.compressor is not None and
-                        stored_embedding.shape[0] > query_emb_array.shape[0]):
-                        
-                        try:
-                            stored_embedding = self.pca_wrapper.compressor.compress(stored_embedding)
-                        except:
-                            continue  # Skip if compression fails
-                    
-                    # If dimensions still don't match, skip this entry
-                    if query_emb_array.shape != stored_embedding.shape:
-                        continue
-                
-                # Compute similarity
-                similarity_score = self._cosine_similarity(query_emb_array, stored_embedding)
-                
-                # Check if above threshold and better than current best
-                if similarity_score >= threshold and similarity_score > best_score:
-                    best_score = similarity_score
-                    best_match = (stored_data[0], stored_data[1], similarity_score)  # query, answer, score
-                    
+                from ..core.pca_wrapper import PCAEmbeddingWrapper
+                base_func = lambda text: self.gptcache_embedding.to_embeddings(text)
+                self.pca_wrapper = PCAEmbeddingWrapper(
+                    base_embedding_func=base_func,
+                    target_dimensions=self.config.pca.target_dimensions,
+                    model_path=self.config.pca.model_path
+                )
             except Exception as e:
-                print(f"Similarity search error: {e}")
-                continue
+                print(f"PCA initialization error: {e}")
+                self.enable_pca = False
         
-        if best_match:
-            return best_match[1], best_match[2], True  # answer, score, hit
-        return None, 0.0, False  # no hit
-    
+        # Initialize context similarity if enabled
+        self.context_similarity = None
+        if self.enable_context:
+            try:
+                from ..core.context_similarity import ContextAwareSimilarity
+                self.context_similarity = ContextAwareSimilarity(
+                    embedding_model=self.embedding_model_name,
+                    context_window_size=self.config.context.window_size,
+                    divergence_threshold=self.config.context.divergence_threshold,
+                    base_similarity_func=self.similarity_evaluation,
+                )
+            except Exception as e:
+                print(f"Context similarity initialization error: {e}")
+                self.enable_context = False
+        
+        # Initialize τ-manager if enabled
+        self.tau_manager = None
+        if self.enable_tau:
+            try:
+                from ..core.tau_manager import TauManager
+                self.tau_manager = TauManager()
+            except Exception as e:
+                print(f"Tau manager initialization error: {e}")
+                self.enable_tau = False
+
     def query(
         self, 
         query: str, 
@@ -140,92 +140,96 @@ class EnhancedCache:
         ground_truth_response: Optional[str] = None,
         **kwargs
     ) -> Dict[str, Any]:
-        """Query the enhanced cache."""
+        """Query the enhanced cache with proper error handling."""
         start_time = time.time()
         self.total_queries += 1
         
-        # Add conversation turn to context tracker if enabled
-        if self.enable_context and self.context_similarity:
-            self.context_similarity.add_conversation_turn(
-                conversation_id=conversation_id,
-                query=query,
-                timestamp=start_time
-            )
-        
-        # Query the cache
-        with BenchmarkTimer("cache_query") as timer:
-            try:
-                # Generate embedding (with PCA compression if enabled)
-                if self.enable_pca and self.pca_wrapper:
-                    query_embedding = self.pca_wrapper(query)
-                else:
-                    query_embedding = self.gptcache_embedding.to_embeddings(query)
-                
-                # Determine current threshold (with τ-tuning if enabled)
-                current_threshold = self.config.cache.similarity_threshold
-                if self.enable_tau and self.tau_manager:
-                    current_threshold = self.tau_manager.get_current_threshold()
-                
-                # Search with similarity evaluation
-                response, similarity_score, cache_hit = self._search_with_similarity(
-                    query_embedding, query, threshold=current_threshold
+        try:
+            # Add conversation turn to context tracker if enabled
+            if self.enable_context and self.context_similarity:
+                self.context_similarity.add_conversation_turn(
+                    conversation_id=conversation_id,
+                    query=query,
+                    timestamp=start_time
                 )
+            
+            with BenchmarkTimer("cache_query") as timer:
+                # Try to get from cache using proper GPTCache API
+                if hasattr(self, 'use_fallback') and self.use_fallback:
+                    response, cache_hit, similarity_score = self._query_fallback_cache(query)
+                else:
+                    response, cache_hit, similarity_score = self._query_gptcache(query)
                 
-                # Update τ-manager with results if enabled
-                if self.enable_tau and self.tau_manager:
-                    ground_truth_hit = None
-                    if ground_truth_response:
-                        ground_truth_hit = (
-                            cache_hit and 
-                            response and 
-                            str(response).strip().lower() == ground_truth_response.strip().lower()
-                        )
-                    
-                    current_threshold = self.tau_manager.evaluate_threshold(
-                        query=query,
-                        similarity_score=similarity_score,
-                        cache_hit=cache_hit,
-                        ground_truth_hit=ground_truth_hit
-                    )
-                
+                # Update statistics
                 if cache_hit:
                     self.cache_hits += 1
                 else:
                     self.cache_misses += 1
                 
-            except Exception as e:
-                print(f"Cache query error: {e}")
-                cache_hit = False
-                response = None
-                similarity_score = 0.0
-                current_threshold = self.config.cache.similarity_threshold
+        except Exception as e:
+            print(f"Cache query error: {e}")
+            cache_hit = False
+            response = None
+            similarity_score = 0.0
         
-        query_latency = timer.elapsed_ms
+        query_latency = timer.elapsed_ms if 'timer' in locals() else time.time() - start_time
         
-        # Record performance metrics
-        compression_ratio = None
-        if self.enable_pca and hasattr(self.pca_wrapper, 'get_compression_stats'):
-            stats = self.pca_wrapper.get_compression_stats()
-            compression_ratio = stats.get('compression_ratio')
-        
-        record_cache_request(
-            query=query,
-            latency_ms=query_latency,
-            cache_hit=cache_hit,
-            context_similarity=similarity_score if self.enable_context else None,
-            embedding_compression_ratio=compression_ratio,
-            tau_threshold=current_threshold
-        )
+        # Record metrics
+        self._record_metrics(query, query_latency, cache_hit, similarity_score)
         
         return {
             'query': query,
             'response': response,
             'cache_hit': cache_hit,
             'latency_ms': query_latency,
-            'similarity_threshold': current_threshold,
+            'similarity_threshold': self.config.cache.similarity_threshold,
             'conversation_id': conversation_id,
             'timestamp': start_time,
         }
+    
+    def _query_gptcache(self, query: str):
+        """Query using proper GPTCache API."""
+        try:
+            # Use GPTCache's built-in query method
+            response = cache.get(query)
+            if response is not None:
+                return response, True, 1.0  # Cache hit
+            else:
+                return None, False, 0.0  # Cache miss
+        except Exception as e:
+            print(f"GPTCache query error: {e}")
+            return None, False, 0.0
+    
+    def _query_fallback_cache(self, query: str):
+        """Fallback cache implementation."""
+        try:
+            # Generate embedding
+            if self.enable_pca and self.pca_wrapper:
+                query_embedding = self.pca_wrapper(query)
+            else:
+                query_embedding = self.gptcache_embedding.to_embeddings(query)
+            
+            # Simple similarity search in fallback cache
+            best_match = None
+            best_score = 0.0
+            threshold = self.config.cache.similarity_threshold
+            
+            for stored_query, stored_data in self.fallback_cache.items():
+                stored_embedding = stored_data['embedding']
+                similarity = self._cosine_similarity(query_embedding, stored_embedding)
+                
+                if similarity >= threshold and similarity > best_score:
+                    best_score = similarity
+                    best_match = stored_data['response']
+            
+            if best_match:
+                return best_match, True, best_score
+            else:
+                return None, False, 0.0
+                
+        except Exception as e:
+            print(f"Fallback cache error: {e}")
+            return None, False, 0.0
     
     def set(
         self,
@@ -245,19 +249,70 @@ class EnhancedCache:
                     timestamp=time.time()
                 )
             
-            # Generate embedding (with PCA compression if enabled)
+            # Store in cache
+            if hasattr(self, 'use_fallback') and self.use_fallback:
+                self._set_fallback_cache(query, response)
+            else:
+                self._set_gptcache(query, response)
+                
+        except Exception as e:
+            print(f"Cache set error: {e}")
+    
+    def _set_gptcache(self, query: str, response: str):
+        """Store using GPTCache API."""
+        try:
+            # Use GPTCache's built-in set method
+            cache.set(query, response)
+        except Exception as e:
+            print(f"GPTCache set error: {e}")
+    
+    def _set_fallback_cache(self, query: str, response: str):
+        """Store in fallback cache."""
+        try:
+            # Generate embedding
             if self.enable_pca and self.pca_wrapper:
                 query_embedding = self.pca_wrapper(query)
             else:
                 query_embedding = self.gptcache_embedding.to_embeddings(query)
-                
-            query_embedding_str = self._embedding_to_string(query_embedding)
             
-            # Store using verified API
-            self.data_manager.save(query, response, query_embedding_str)
-            
+            # Store in fallback cache
+            self.fallback_cache[query] = {
+                'response': response,
+                'embedding': query_embedding,
+                'timestamp': time.time()
+            }
         except Exception as e:
-            print(f"Cache set error: {e}")
+            print(f"Fallback set error: {e}")
+    
+    def _cosine_similarity(self, emb1, emb2):
+        """Compute cosine similarity between two embeddings."""
+        emb1 = np.array(emb1)
+        emb2 = np.array(emb2)
+        return np.dot(emb1, emb2) / (np.linalg.norm(emb1) * np.linalg.norm(emb2))
+    
+    def _record_metrics(self, query: str, latency: float, cache_hit: bool, similarity_score: float):
+        """Record performance metrics."""
+        try:
+            compression_ratio = None
+            if self.enable_pca and self.pca_wrapper and hasattr(self.pca_wrapper, 'get_compression_stats'):
+                stats = self.pca_wrapper.get_compression_stats()
+                compression_ratio = stats.get('compression_ratio')
+            
+            # Get current threshold
+            current_threshold = self.config.cache.similarity_threshold
+            if self.enable_tau and self.tau_manager:
+                current_threshold = self.tau_manager.get_current_threshold()
+            
+            record_cache_request(
+                query=query,
+                latency_ms=latency,
+                cache_hit=cache_hit,
+                context_similarity=similarity_score if self.enable_context else None,
+                embedding_compression_ratio=compression_ratio,
+                tau_threshold=current_threshold
+            )
+        except Exception as e:
+            print(f"Metrics recording error: {e}")
     
     def get_stats(self) -> Dict[str, Any]:
         """Get comprehensive cache statistics."""
@@ -277,16 +332,12 @@ class EnhancedCache:
         self.cache_hits = 0
         self.cache_misses = 0
         get_performance_tracker().reset_metrics()
-    
-    def get_current_threshold(self) -> float:
-        """Get current similarity threshold."""
-        return self.config.cache.similarity_threshold
 
 def create_enhanced_cache(
     embedding_model: Optional[str] = None,
     **kwargs
 ) -> EnhancedCache:
-    """Create an enhanced cache that works."""
+    """Create an enhanced cache with proper initialization."""
     return EnhancedCache(
         embedding_model=embedding_model,
         **kwargs
