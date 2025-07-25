@@ -1,36 +1,36 @@
-# Enhanced GPTCache Configuration
-
-cache:
-  size_mb: 100
-  similarity_threshold: 0.8
-  eviction_policy: lru
-
-context:
-  enabled: true
-  window_size: 5
-  divergence_threshold: 0.3
-  embedding_model: sentence-transformers/all-MiniLM-L6-v2
-
-pca:
-  enabled: true
-  target_dimensions: 128
-  training_samples: 20
-  model_path: models/pca_model.pkl
-  compression_threshold: 100
-
-federated:
-  enabled: true
-  num_users: 10
-  aggregation_frequency: 100
-  learning_rate: 0.01
-  initial_tau: 0.8
-
 benchmark:
   output_dir: data/results
   query_count: 1000
   variants:
-    - baseline
-    - context
-    - pca
-    - tau
-    - full
+  - baseline
+  - context
+  - pca
+  - tau
+  - full
+cache:
+  eviction_policy: lru
+  similarity_threshold: 0.85
+  size_mb: 100
+context:
+  divergence_threshold: 0.3
+  embedding_model: sentence-transformers/all-MiniLM-L6-v2
+  enabled: true
+  window_size: 5
+expected_performance:
+  baseline_hit_rate: 10-15%
+  context_hit_rate: 15-25%
+  full_hit_rate: 20-30%
+  pca_hit_rate: 12-18%
+  tau_hit_rate: 15-20%
+federated:
+  aggregation_frequency: 100
+  enabled: true
+  initial_tau: 0.85
+  learning_rate: 0.01
+  num_users: 10
+pca:
+  compression_threshold: 100
+  enabled: true
+  model_path: models/pca_model.pkl
+  target_dimensions: 128
+  training_samples: 1000

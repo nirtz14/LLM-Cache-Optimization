@@ -76,16 +76,8 @@ class EnhancedCache:
         
     def _initialize_enhanced_features(self):
         """Initialize PCA, context similarity, and tau manager."""
-        # In fallback mode, disable complex features for stability
-        if hasattr(self, 'use_fallback') and self.use_fallback:
-            print("📝 Fallback mode: Disabling complex features for stability")
-            self.enable_context = False
-            self.enable_pca = False
-            self.enable_tau = False
-            self.pca_wrapper = None
-            self.context_similarity = None
-            self.tau_manager = None
-            return
+        # DON'T disable features in fallback mode - that's the whole point!
+        print("🚀 Initializing enhanced features...")
         
         # Initialize PCA compression if enabled
         self.pca_wrapper = None
@@ -98,8 +90,9 @@ class EnhancedCache:
                     target_dimensions=self.config.pca.target_dimensions,
                     model_path=self.config.pca.model_path
                 )
+                print("✅ PCA compression enabled")
             except Exception as e:
-                print(f"PCA initialization error: {e}")
+                print(f"⚠️  PCA initialization error: {e}")
                 self.enable_pca = False
         
         # Initialize context similarity if enabled
@@ -113,8 +106,9 @@ class EnhancedCache:
                     divergence_threshold=self.config.context.divergence_threshold,
                     base_similarity_func=self.similarity_evaluation,
                 )
+                print("✅ Context filtering enabled")
             except Exception as e:
-                print(f"Context similarity initialization error: {e}")
+                print(f"⚠️  Context similarity initialization error: {e}")
                 self.enable_context = False
         
         # Initialize τ-manager if enabled
@@ -123,9 +117,13 @@ class EnhancedCache:
             try:
                 from ..core.tau_manager import TauManager
                 self.tau_manager = TauManager()
+                print("✅ Tau tuning enabled")
             except Exception as e:
-                print(f"Tau manager initialization error: {e}")
+                print(f"⚠️  Tau manager initialization error: {e}")
                 self.enable_tau = False
+        
+        # Report final status
+        print(f"📊 Feature status: PCA={self.enable_pca}, Context={self.enable_context}, Tau={self.enable_tau}")
 
     def _embedding_to_string(self, embedding) -> str:
         """Convert numpy embedding to hashable string."""
@@ -243,7 +241,7 @@ class EnhancedCache:
             with BenchmarkTimer("cache_query") as timer:
                 # Try to get from cache using proper GPTCache API
                 if hasattr(self, 'use_fallback') and self.use_fallback:
-                    response, cache_hit, similarity_score = self._query_fallback_cache(query)
+                    response, cache_hit, similarity_score = self._query_fallback_cache(query, conversation_id)
                 else:
                     response, cache_hit, similarity_score = self._query_gptcache(query)
                 
@@ -288,8 +286,8 @@ class EnhancedCache:
             print(f"GPTCache query error: {e}")
             return None, False, 0.0
     
-    def _query_fallback_cache(self, query: str):
-        """Fallback cache implementation."""
+    def _query_fallback_cache(self, query: str, conversation_id: str = "default"):
+        """Fallback cache implementation with enhanced features."""
         try:
             # Generate embedding
             if self.enable_pca and self.pca_wrapper:
@@ -297,14 +295,26 @@ class EnhancedCache:
             else:
                 query_embedding = self.gptcache_embedding.to_embeddings(query)
             
+            # Get current threshold (tau tuning)
+            threshold = self.config.cache.similarity_threshold
+            if self.enable_tau and self.tau_manager:
+                threshold = self.tau_manager.get_current_threshold()
+            
             # Simple similarity search in fallback cache
             best_match = None
             best_score = 0.0
-            threshold = self.config.cache.similarity_threshold
             
             for stored_query, stored_data in self.fallback_cache.items():
                 stored_embedding = stored_data['embedding']
                 similarity = self._cosine_similarity(query_embedding, stored_embedding)
+                
+                # Apply context filtering if enabled
+                if self.enable_context and self.context_similarity:
+                    # Simple context filtering: different conversations should not match
+                    stored_conversation_id = stored_data.get('conversation_id', 'default')
+                    if conversation_id != stored_conversation_id:
+                        # Skip this cache entry due to different conversation
+                        continue
                 
                 if similarity >= threshold and similarity > best_score:
                     best_score = similarity
@@ -339,7 +349,7 @@ class EnhancedCache:
             
             # Store in appropriate cache
             if hasattr(self, 'use_fallback') and self.use_fallback:
-                self._set_fallback_cache(query, response)
+                self._set_fallback_cache(query, response, conversation_id)
             else:
                 self._set_gptcache(query, response)
                 
@@ -355,7 +365,7 @@ class EnhancedCache:
         except Exception as e:
             print(f"GPTCache set error: {e}")
     
-    def _set_fallback_cache(self, query: str, response: str):
+    def _set_fallback_cache(self, query: str, response: str, conversation_id: str = "default"):
         """Store in fallback cache."""
         try:
             # Generate embedding (with PCA compression if enabled)
@@ -364,11 +374,12 @@ class EnhancedCache:
             else:
                 query_embedding = self.gptcache_embedding.to_embeddings(query)
             
-            # Store in fallback cache
+            # Store in fallback cache with conversation_id
             self.fallback_cache[query] = {
                 'response': response,
                 'embedding': query_embedding,
-                'timestamp': time.time()
+                'timestamp': time.time(),
+                'conversation_id': conversation_id  # Add this!
             }
             
             # Also store in data_manager for compatibility

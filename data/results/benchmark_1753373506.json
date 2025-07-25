@@ -1,0 +1,761 @@
+{
+  "metadata": {
+    "total_queries": 95,
+    "variants": [
+      "baseline"
+    ],
+    "warmup_enabled": true,
+    "timestamp": 1753373506.7891717,
+    "config": {
+      "cache": {
+        "size_mb": 100,
+        "similarity_threshold": 0.8,
+        "eviction_policy": "lru"
+      },
+      "context": {
+        "enabled": true,
+        "window_size": 5,
+        "divergence_threshold": 0.3,
+        "embedding_model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "pca": {
+        "enabled": true,
+        "target_dimensions": 128,
+        "training_samples": 1000,
+        "model_path": "models/pca_model.pkl",
+        "compression_threshold": 100
+      },
+      "federated": {
+        "enabled": true,
+        "num_users": 10,
+        "aggregation_frequency": 100,
+        "learning_rate": 0.01,
+        "initial_tau": 0.8
+      },
+      "benchmark": {
+        "output_dir": "data/results",
+        "query_count": 1000,
+        "variants": [
+          "baseline",
+          "context",
+          "pca",
+          "tau",
+          "full"
+        ]
+      }
+    }
+  },
+  "results": {
+    "baseline": {
+      "variant": "baseline",
+      "total_queries": 76,
+      "total_time_s": 0.991065263748169,
+      "queries_per_second": 76.6851616941664,
+      "cache_statistics": {
+        "total_queries": 76,
+        "cache_hits": 17,
+        "cache_misses": 59,
+        "hit_rate": 0.2236842105263158
+      },
+      "performance_metrics": {
+        "total_requests": 76,
+        "cache_hit_rate": 0.2236842105263158,
+        "avg_latency_ms": 12.884265498111123,
+        "p95_latency_ms": 17.119646072387695,
+        "p99_latency_ms": 23.259282112121582,
+        "avg_memory_mb": 467.13754111842104,
+        "avg_cpu_percent": 22.915789473684214,
+        "avg_context_similarity": null,
+        "avg_compression_ratio": null,
+        "avg_tau_threshold": 0.7999999999999998
+      },
+      "query_results": [
+        {
+          "query_id": "query_000063",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 15.905618667602539,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_33f77442"
+        },
+        {
+          "query_id": "query_000089",
+          "variant": "baseline",
+          "cache_hit": true,
+          "latency_ms": 24.6737003326416,
+          "category": "similar",
+          "similarity_group": "similar_group_000",
+          "conversation_id": "similar_conv_000"
+        },
+        {
+          "query_id": "query_000073",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 15.943765640258789,
+          "category": "contextual",
+          "similarity_group": null,
+          "conversation_id": "contextual_conv_000"
+        },
+        {
+          "query_id": "query_000056",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 17.707347869873047,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_cec882b2"
+        },
+        {
+          "query_id": "query_000014",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 12.24207878112793,
+          "category": "repetitive",
+          "similarity_group": "Where is your nearest location?",
+          "conversation_id": "repetitive_conv_13"
+        },
+        {
+          "query_id": "query_000001",
+          "variant": "baseline",
+          "cache_hit": true,
+          "latency_ms": 11.861324310302734,
+          "category": "repetitive",
+          "similarity_group": "How do I reset my password?",
+          "conversation_id": "repetitive_conv_0"
+        },
+        {
+          "query_id": "query_000051",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 14.413118362426758,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_eda0137e"
+        },
+        {
+          "query_id": "query_000021",
+          "variant": "baseline",
+          "cache_hit": true,
+          "latency_ms": 12.218475341796875,
+          "category": "repetitive",
+          "similarity_group": "What payment methods do you accept?",
+          "conversation_id": "repetitive_conv_0"
+        },
+        {
+          "query_id": "query_000066",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 14.96267318725586,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_a42b1d36"
+        },
+        {
+          "query_id": "query_000093",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 11.178731918334961,
+          "category": "similar",
+          "similarity_group": "similar_group_001",
+          "conversation_id": "similar_conv_001"
+        },
+        {
+          "query_id": "query_000012",
+          "variant": "baseline",
+          "cache_hit": true,
+          "latency_ms": 11.56163215637207,
+          "category": "repetitive",
+          "similarity_group": "How do I contact customer service?",
+          "conversation_id": "repetitive_conv_11"
+        },
+        {
+          "query_id": "query_000022",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 11.580467224121094,
+          "category": "repetitive",
+          "similarity_group": "Where is your nearest location?",
+          "conversation_id": "repetitive_conv_1"
+        },
+        {
+          "query_id": "query_000064",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 16.793251037597656,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_ce411dca"
+        },
+        {
+          "query_id": "query_000023",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 12.12763786315918,
+          "category": "repetitive",
+          "similarity_group": "What is your return policy?",
+          "conversation_id": "repetitive_conv_2"
+        },
+        {
+          "query_id": "query_000079",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 12.611150741577148,
+          "category": "contextual",
+          "similarity_group": null,
+          "conversation_id": "contextual_conv_002"
+        },
+        {
+          "query_id": "query_000053",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 14.376401901245117,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_10a14aed"
+        },
+        {
+          "query_id": "query_000084",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 13.092041015625,
+          "category": "contextual",
+          "similarity_group": null,
+          "conversation_id": "contextual_conv_004"
+        },
+        {
+          "query_id": "query_000086",
+          "variant": "baseline",
+          "cache_hit": true,
+          "latency_ms": 13.533353805541992,
+          "category": "similar",
+          "similarity_group": "similar_group_000",
+          "conversation_id": "similar_conv_000"
+        },
+        {
+          "query_id": "query_000016",
+          "variant": "baseline",
+          "cache_hit": true,
+          "latency_ms": 12.253284454345703,
+          "category": "repetitive",
+          "similarity_group": "What payment methods do you accept?",
+          "conversation_id": "repetitive_conv_15"
+        },
+        {
+          "query_id": "query_000055",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 14.246225357055664,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_0fcc33c7"
+        },
+        {
+          "query_id": "query_000005",
+          "variant": "baseline",
+          "cache_hit": true,
+          "latency_ms": 11.00301742553711,
+          "category": "repetitive",
+          "similarity_group": "How do I reset my password?",
+          "conversation_id": "repetitive_conv_4"
+        },
+        {
+          "query_id": "query_000013",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 11.38615608215332,
+          "category": "repetitive",
+          "similarity_group": "What is your return policy?",
+          "conversation_id": "repetitive_conv_12"
+        },
+        {
+          "query_id": "query_000071",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 10.985374450683594,
+          "category": "contextual",
+          "similarity_group": null,
+          "conversation_id": "contextual_conv_000"
+        },
+        {
+          "query_id": "query_000025",
+          "variant": "baseline",
+          "cache_hit": true,
+          "latency_ms": 10.686874389648438,
+          "category": "repetitive",
+          "similarity_group": "How do I reset my password?",
+          "conversation_id": "repetitive_conv_4"
+        },
+        {
+          "query_id": "query_000087",
+          "variant": "baseline",
+          "cache_hit": true,
+          "latency_ms": 10.789155960083008,
+          "category": "similar",
+          "similarity_group": "similar_group_000",
+          "conversation_id": "similar_conv_000"
+        },
+        {
+          "query_id": "query_000037",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 10.259151458740234,
+          "category": "repetitive",
+          "similarity_group": "How do I track my order?",
+          "conversation_id": "repetitive_conv_16"
+        },
+        {
+          "query_id": "query_000052",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 14.859914779663086,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_881fe1e4"
+        },
+        {
+          "query_id": "query_000002",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 11.327981948852539,
+          "category": "repetitive",
+          "similarity_group": "Where is your nearest location?",
+          "conversation_id": "repetitive_conv_1"
+        },
+        {
+          "query_id": "query_000038",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 12.282133102416992,
+          "category": "repetitive",
+          "similarity_group": "Do you offer free shipping?",
+          "conversation_id": "repetitive_conv_17"
+        },
+        {
+          "query_id": "query_000078",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 11.51132583618164,
+          "category": "contextual",
+          "similarity_group": null,
+          "conversation_id": "contextual_conv_002"
+        },
+        {
+          "query_id": "query_000069",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 22.787809371948242,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_5b0f519c"
+        },
+        {
+          "query_id": "query_000058",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 14.984846115112305,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_041b2ba4"
+        },
+        {
+          "query_id": "query_000060",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 15.686750411987305,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_30144bd3"
+        },
+        {
+          "query_id": "query_000008",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 16.9680118560791,
+          "category": "repetitive",
+          "similarity_group": "Can you help me with my order?",
+          "conversation_id": "repetitive_conv_7"
+        },
+        {
+          "query_id": "query_000046",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 17.574548721313477,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_462d7292"
+        },
+        {
+          "query_id": "query_000048",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 15.251636505126953,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_9bbdee06"
+        },
+        {
+          "query_id": "query_000057",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 13.894081115722656,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_04be0d5d"
+        },
+        {
+          "query_id": "query_000039",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 12.380361557006836,
+          "category": "repetitive",
+          "similarity_group": "What are your business hours?",
+          "conversation_id": "repetitive_conv_18"
+        },
+        {
+          "query_id": "query_000082",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 13.42630386352539,
+          "category": "contextual",
+          "similarity_group": null,
+          "conversation_id": "contextual_conv_003"
+        },
+        {
+          "query_id": "query_000095",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 10.495901107788086,
+          "category": "similar",
+          "similarity_group": "similar_group_001",
+          "conversation_id": "similar_conv_001"
+        },
+        {
+          "query_id": "query_000050",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 13.11945915222168,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_169a9a07"
+        },
+        {
+          "query_id": "query_000067",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 12.889385223388672,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_d7a09b01"
+        },
+        {
+          "query_id": "query_000077",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 11.988162994384766,
+          "category": "contextual",
+          "similarity_group": null,
+          "conversation_id": "contextual_conv_002"
+        },
+        {
+          "query_id": "query_000030",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 12.487649917602539,
+          "category": "repetitive",
+          "similarity_group": "Where is your nearest location?",
+          "conversation_id": "repetitive_conv_9"
+        },
+        {
+          "query_id": "query_000090",
+          "variant": "baseline",
+          "cache_hit": true,
+          "latency_ms": 11.461257934570312,
+          "category": "similar",
+          "similarity_group": "similar_group_000",
+          "conversation_id": "similar_conv_000"
+        },
+        {
+          "query_id": "query_000015",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 10.483980178833008,
+          "category": "repetitive",
+          "similarity_group": "What are your business hours?",
+          "conversation_id": "repetitive_conv_14"
+        },
+        {
+          "query_id": "query_000081",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 10.887861251831055,
+          "category": "contextual",
+          "similarity_group": null,
+          "conversation_id": "contextual_conv_003"
+        },
+        {
+          "query_id": "query_000017",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 11.341094970703125,
+          "category": "repetitive",
+          "similarity_group": "What are your business hours?",
+          "conversation_id": "repetitive_conv_16"
+        },
+        {
+          "query_id": "query_000031",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 12.727022171020508,
+          "category": "repetitive",
+          "similarity_group": "Can you help me with my order?",
+          "conversation_id": "repetitive_conv_10"
+        },
+        {
+          "query_id": "query_000020",
+          "variant": "baseline",
+          "cache_hit": true,
+          "latency_ms": 11.904478073120117,
+          "category": "repetitive",
+          "similarity_group": "How do I reset my password?",
+          "conversation_id": "repetitive_conv_19"
+        },
+        {
+          "query_id": "query_000080",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 13.335227966308594,
+          "category": "contextual",
+          "similarity_group": null,
+          "conversation_id": "contextual_conv_003"
+        },
+        {
+          "query_id": "query_000026",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 10.847806930541992,
+          "category": "repetitive",
+          "similarity_group": "Where is your nearest location?",
+          "conversation_id": "repetitive_conv_5"
+        },
+        {
+          "query_id": "query_000032",
+          "variant": "baseline",
+          "cache_hit": true,
+          "latency_ms": 11.891841888427734,
+          "category": "repetitive",
+          "similarity_group": "How do I contact customer service?",
+          "conversation_id": "repetitive_conv_11"
+        },
+        {
+          "query_id": "query_000004",
+          "variant": "baseline",
+          "cache_hit": true,
+          "latency_ms": 11.24882698059082,
+          "category": "repetitive",
+          "similarity_group": "How do I reset my password?",
+          "conversation_id": "repetitive_conv_3"
+        },
+        {
+          "query_id": "query_000006",
+          "variant": "baseline",
+          "cache_hit": true,
+          "latency_ms": 14.981269836425781,
+          "category": "repetitive",
+          "similarity_group": "How do I contact customer service?",
+          "conversation_id": "repetitive_conv_5"
+        },
+        {
+          "query_id": "query_000009",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 10.680198669433594,
+          "category": "repetitive",
+          "similarity_group": "Do you offer free shipping?",
+          "conversation_id": "repetitive_conv_8"
+        },
+        {
+          "query_id": "query_000029",
+          "variant": "baseline",
+          "cache_hit": true,
+          "latency_ms": 10.094404220581055,
+          "category": "repetitive",
+          "similarity_group": "What is the weather today?",
+          "conversation_id": "repetitive_conv_8"
+        },
+        {
+          "query_id": "query_000045",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 11.606931686401367,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_f4070907"
+        },
+        {
+          "query_id": "query_000094",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 10.257959365844727,
+          "category": "similar",
+          "similarity_group": "similar_group_001",
+          "conversation_id": "similar_conv_001"
+        },
+        {
+          "query_id": "query_000070",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 13.230562210083008,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_f6a2d7ce"
+        },
+        {
+          "query_id": "query_000003",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 11.740446090698242,
+          "category": "repetitive",
+          "similarity_group": "Can you help me with my order?",
+          "conversation_id": "repetitive_conv_2"
+        },
+        {
+          "query_id": "query_000061",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 13.204336166381836,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_16f49f3f"
+        },
+        {
+          "query_id": "query_000011",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 11.330842971801758,
+          "category": "repetitive",
+          "similarity_group": "Can you help me with my order?",
+          "conversation_id": "repetitive_conv_10"
+        },
+        {
+          "query_id": "query_000033",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 12.663125991821289,
+          "category": "repetitive",
+          "similarity_group": "What is your return policy?",
+          "conversation_id": "repetitive_conv_12"
+        },
+        {
+          "query_id": "query_000054",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 12.511014938354492,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_cb1cfc9a"
+        },
+        {
+          "query_id": "query_000036",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 11.542797088623047,
+          "category": "repetitive",
+          "similarity_group": "Where is your nearest location?",
+          "conversation_id": "repetitive_conv_15"
+        },
+        {
+          "query_id": "query_000092",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 10.08296012878418,
+          "category": "similar",
+          "similarity_group": "similar_group_001",
+          "conversation_id": "similar_conv_001"
+        },
+        {
+          "query_id": "query_000044",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 12.112617492675781,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_7b969864"
+        },
+        {
+          "query_id": "query_000091",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 10.325908660888672,
+          "category": "similar",
+          "similarity_group": "similar_group_001",
+          "conversation_id": "similar_conv_001"
+        },
+        {
+          "query_id": "query_000059",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 13.414621353149414,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_d11ad339"
+        },
+        {
+          "query_id": "query_000028",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 14.30821418762207,
+          "category": "repetitive",
+          "similarity_group": "Can you help me with my order?",
+          "conversation_id": "repetitive_conv_7"
+        },
+        {
+          "query_id": "query_000042",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 13.606786727905273,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_c3f2842f"
+        },
+        {
+          "query_id": "query_000049",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 12.54582405090332,
+          "category": "novel",
+          "similarity_group": null,
+          "conversation_id": "novel_conv_780ab8b8"
+        },
+        {
+          "query_id": "query_000034",
+          "variant": "baseline",
+          "cache_hit": false,
+          "latency_ms": 10.457277297973633,
+          "category": "repetitive",
+          "similarity_group": "What are your business hours?",
+          "conversation_id": "repetitive_conv_13"
+        },
+        {
+          "query_id": "query_000007",
+          "variant": "baseline",
+          "cache_hit": true,
+          "latency_ms": 9.775638580322266,
+          "category": "repetitive",
+          "similarity_group": "What is the weather today?",
+          "conversation_id": "repetitive_conv_6"
+        },
+        {
+          "query_id": "query_000024",
+          "variant": "baseline",
+          "cache_hit": true,
+          "latency_ms": 10.292768478393555,
+          "category": "repetitive",
+          "similarity_group": "How do I reset my password?",
+          "conversation_id": "repetitive_conv_3"
+        }
+      ],
+      "timestamp": 1753373511.32533
+    }
+  }
+}
