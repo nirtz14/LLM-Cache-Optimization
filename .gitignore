@@ -149,8 +149,13 @@ models/
 *.pkl
 *.joblib
 data/cache/
+data/results/benchmark_*.json
+data/results/benchmark_*.csv
+data/metrics/
 logs/
 temp/
+test_creation.py
+diagnose.py
 
 # Docker
 .dockerignore
