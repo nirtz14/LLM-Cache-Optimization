@@ -1,0 +1,2 @@
+variant,hit_rate,avg_latency_ms,p95_latency_ms,p99_latency_ms,queries_per_second,total_queries,total_time_s,avg_memory_mb,avg_cpu_percent
+baseline,0.2236842105263158,12.884265498111123,17.119646072387695,23.259282112121582,76.6851616941664,76,0.991065263748169,467.13754111842104,22.915789473684214
