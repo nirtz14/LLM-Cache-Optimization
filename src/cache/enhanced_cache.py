@@ -1,25 +1,29 @@
-"""Simple working cache implementation using verified GPTCache APIs."""
+"""Enhanced GPTCache implementation using proper GPTCache Cache builder pattern."""
 import time
-import json
-from typing import Optional, Any, Dict
-from sentence_transformers import SentenceTransformer
+from typing import Optional, Any, Dict, List
 import numpy as np
 
+from gptcache import Cache, Config
+from gptcache.adapter.api import put, get
 from gptcache.embedding import SBERT
-from gptcache.manager import get_data_manager
+from gptcache.manager import get_data_manager, CacheBase, VectorBase
+from gptcache.similarity_evaluation import SimilarityEvaluation
+from gptcache.similarity_evaluation.distance import SearchDistanceEvaluation
+from gptcache.processor.pre import get_prompt
 
 from ..utils.config import get_config
 from ..utils.metrics import get_performance_tracker, BenchmarkTimer, record_cache_request
 
-class EnhancedCache:
-    """Enhanced GPTCache that actually works."""
+
+class EnhancedSimilarityEvaluation(SimilarityEvaluation):
+    """Enhanced similarity evaluation with context filtering and PCA support."""
     
     def __init__(
-        self,
-        embedding_model: Optional[str] = None,
+        self, 
+        base_similarity: SimilarityEvaluation = None,
         enable_context: bool = True,
-        enable_pca: bool = True,
         enable_tau: bool = True,
+        config=None
     ):
         """Initialize enhanced cache."""
         self.config = get_config()
@@ -32,7 +36,6 @@ class EnhancedCache:
         
         # Store feature flags
         self.enable_context = enable_context
-        self.enable_pca = enable_pca
         self.enable_tau = enable_tau
         
         # Initialize GPTCache components
@@ -110,6 +113,13 @@ class EnhancedCache:
             except Exception as e:
                 print(f"⚠️  Context similarity initialization error: {e}")
                 self.enable_context = False
+            from ..core.context_similarity import ContextAwareSimilarity
+            self.context_similarity = ContextAwareSimilarity(
+                embedding_model=self.config.context.embedding_model,
+                context_window_size=self.config.context.window_size,
+                divergence_threshold=self.config.context.divergence_threshold,
+                base_similarity_func=self.base_similarity,
+            )
         
         # Initialize τ-manager if enabled
         self.tau_manager = None
@@ -141,11 +151,10 @@ class EnhancedCache:
         emb2 = np.array(emb2)
         return np.dot(emb1, emb2) / (np.linalg.norm(emb1) * np.linalg.norm(emb2))
     
-    def _search_with_similarity(self, query_embedding, query: str, threshold: float = 0.8):
-        """Search and apply similarity evaluation."""
-        query_emb_array = np.array(query_embedding)
-        best_match = None
-        best_score = 0.0
+    def _create_embedding_function(self):
+        """Create embedding function with optional PCA compression."""
+        # Base SBERT embedding
+        base_embedding = SBERT(self.embedding_model_name)
         
         # Check if we're using fallback cache
         if hasattr(self, 'use_fallback') and self.use_fallback:
@@ -184,9 +193,10 @@ class EnhancedCache:
             print(f"Similarity search error: {e}")
             return None, 0.0, False
         
-        if best_match:
-            return best_match[1], best_match[2], True  # answer, score, hit
-        return None, 0.0, False  # no hit
+        # Use SQLite + FAISS for storage
+        cache_base = CacheBase("sqlite")
+        vector_base = VectorBase("faiss", dimension=dimension)
+        return get_data_manager(cache_base, vector_base)
     
     def _search_fallback_cache(self, query_embedding, threshold: float = 0.8):
         """Search in fallback cache."""
@@ -339,8 +349,10 @@ class EnhancedCache:
         """Store a query-response pair in the cache."""
         try:
             # Add to context tracker if enabled
-            if self.enable_context and self.context_similarity:
-                self.context_similarity.add_conversation_turn(
+            if (self.enable_context and 
+                hasattr(self.similarity_evaluation, 'context_similarity') and
+                self.similarity_evaluation.context_similarity):
+                self.similarity_evaluation.context_similarity.add_conversation_turn(
                     conversation_id=conversation_id,
                     query=query,
                     response=response,
