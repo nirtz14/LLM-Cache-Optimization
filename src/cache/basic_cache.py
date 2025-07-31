@@ -5,6 +5,7 @@ from gptcache import cache, Config
 from gptcache.adapter.api import put, get
 from gptcache.embedding import SBERT
 from gptcache.manager import get_data_manager, CacheBase, VectorBase
+from gptcache.processor.pre import get_prompt
 
 # Configuration
 SIM_THRESHOLD = 0.70  # loose threshold for easy hits
@@ -13,8 +14,17 @@ SIM_THRESHOLD = 0.70  # loose threshold for easy hits
 hit_count = 0
 miss_count = 0
 
+def reset_cache_stats():
+    """Reset the cache statistics."""
+    global hit_count, miss_count
+    hit_count = 0
+    miss_count = 0
+
 def init_basic_cache():
     """Initialize GPTCache with basic configuration."""
+    # Reset statistics when initializing cache
+    reset_cache_stats()
+    
     # Create SBERT embeddings
     sbert = SBERT()
     
@@ -26,8 +36,9 @@ def init_basic_cache():
     # Create config with similarity threshold
     config = Config(similarity_threshold=SIM_THRESHOLD)
     
-    # Initialize global cache
+    # Initialize global cache with proper preprocessor that extracts string from data
     cache.init(
+        pre_embedding_func=get_prompt,  # This extracts the prompt string correctly
         embedding_func=sbert.to_embeddings,
         data_manager=data_manager,
         config=config
@@ -42,21 +53,22 @@ def mock_llm(prompt: str) -> str:
     
     start_time = time.time()
     
-    # Try to get from cache first using adapter API
+    # Try to get from cache first - pass the string directly
+    # The get_prompt processor will handle the format conversion
     cached_response = get(prompt)
     
     if cached_response is not None:
         # Cache hit
         hit_count += 1
         elapsed = (time.time() - start_time) * 1000
-        print(f"�� CACHE HIT ({elapsed:.2f}ms): '{prompt[:30]}...'")
+        print(f"✅ CACHE HIT ({elapsed:.2f}ms): '{prompt[:30]}...'")
         return cached_response
     else:
         # Cache miss - generate mock response
         miss_count += 1
         response = f"MOCK_REPLY: {prompt}"
         
-        # Store in cache using adapter API
+        # Store in cache - pass the string directly
         put(prompt, response)
         
         elapsed = (time.time() - start_time) * 1000
