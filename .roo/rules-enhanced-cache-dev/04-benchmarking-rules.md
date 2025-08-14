@@ -1,0 +1,6 @@
+- Provide `benchmark/benchmark_runner.py` and a "How to Benchmark" README with:
+  - workloads: repetitive‑short, novel‑long, contextual‑chained,
+  - metrics: mean, p95/p99 latency, hit‑rate, throughput, memory/CPU.
+- Save results to CSV/JSON; produce plots; include a parameter sweep (e.g., `tau \u2208 [0.7..0.95]`, `cache_size \u2208 {50,100,200} MB`).
+- Always run vanilla vs extended under identical workloads.
+- Require ablation: each extension on/off, plus full combination.
