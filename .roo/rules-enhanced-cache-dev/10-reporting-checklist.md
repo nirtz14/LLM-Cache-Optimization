@@ -1,0 +1,5 @@
+- Maintain /report/notes.md that Roo appends to after each experiment: dataset, parameters, commit hash, and results link.
+- Auto-generate plots into /report/figures/.
+- Export a final 8‑12 page PDF with: introduction, design, setup, results (tables and figures), discussion, and conclusion/future work.
+- Include legends, captions, and axis labels no smaller than 10pt.
+- Reference all artifacts (datasets, figures, scripts) within the report.
