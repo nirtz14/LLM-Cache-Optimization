@@ -1,0 +1,3 @@
+- Provide Dockerfile or environment.yml, deterministic seeds, pinned versions.
+- All scripts runnable without external keys (mock paths).
+- One‑shot setup script: `scripts/setup.sh` installs dependencies, downloads small sample data, runs smoke tests.
