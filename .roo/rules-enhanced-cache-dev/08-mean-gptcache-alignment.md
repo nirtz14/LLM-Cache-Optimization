@@ -1,0 +1,4 @@
+- Keep retrieval based on cosine similarity over compressed embeddings.
+- Annotate contextual queries with context chain identifiers and decline cache hit if chains differ.
+- Add optional federated τ aggregator as a separable module; document privacy boundary.
+- Cite and follow MeanCache patterns (context chain, PCA, adaptive τ) and extend GPTCache via adapters.
