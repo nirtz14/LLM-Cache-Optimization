@@ -1,0 +1,10 @@
+- Always generate or load deterministic fixtures for prompts/embeddings.
+- Unit tests must cover:
+  - Correct hit/miss classification,
+  - False-hit protection on contextual queries,
+  - Eviction policy invariants,
+  - PCA round‑trip sanity (variance retained).
+- Integration tests must run end-to-end with mock LLM and real filesystem cache.
+- Add pytest markers: `slow`, `benchmark`, `integration`.
+- Provide CLI command to run tests headless (e.g., `pytest -q` and `pytest -q --benchmark-only`).
+- All PRs must include tests and ensure continuous integration passes.
