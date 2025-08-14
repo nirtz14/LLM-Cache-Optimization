@@ -1,0 +1,3 @@
+- Branch naming: feat/…, perf/…, fix/…, bench/…, docs/…, test/….
+- Use conventional commit messages; include rationale, test plan, and rubric impact in PR descriptions.
+- Follow PR template with sections for rationale, test plan, screenshots/plots, and rubric impact.
