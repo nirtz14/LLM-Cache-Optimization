@@ -1,0 +1,3 @@
+- Enforce Black/ruff formatting, strict type hints with mypy.
+- Require docstrings with Google or Numpy style and structured logging; never log secrets.
+- All public functions and classes must include Args/Returns/Raises sections.
