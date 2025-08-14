@@ -1,0 +1,4 @@
+- Before running any terminal command, Roo must explain what it will do in one line; destructive commands require explicit confirmation and must be gated behind SAFE=0.
+- Disallow `sudo`, global git config edits, or writing outside workspace.
+- Never open network ports; benchmarking must be local.
+- If a command fails, stop, summarize, and propose a fix—do not loop.
