@@ -44,13 +44,17 @@ class PCATrainer:
             PCAModel: Trained PCA model container
         """
         with self.lock:
-            if embeddings.shape[0] < self.target_dimensions:
-                raise ValueError(
-                    f"Need at least {self.target_dimensions} samples to train PCA, "
-                    f"got {embeddings.shape[0]}"
-                )
-            
             original_dim = embeddings.shape[1]
+            n_samples = embeddings.shape[0]
+            
+            # Adaptive threshold based on sample size - be more flexible with smaller datasets
+            min_samples_needed = max(3, min(self.target_dimensions // 4, 10))
+            
+            if n_samples < min_samples_needed:
+                raise ValueError(
+                    f"Need at least {min_samples_needed} samples to train PCA, "
+                    f"got {n_samples}. Consider using a smaller target_dimensions or collecting more data."
+                )
             
             # Optional scaling
             scaler = None
@@ -58,8 +62,17 @@ class PCATrainer:
                 scaler = StandardScaler()
                 embeddings = scaler.fit_transform(embeddings)
             
-            # Determine optimal number of components
-            n_components = min(self.target_dimensions, embeddings.shape[0], original_dim)
+            # Determine optimal number of components - be more aggressive with small datasets
+            if n_samples < 50:
+                # For very small datasets, use much smaller dimensions
+                n_components = min(
+                    max(2, n_samples // 2),  # At least 2 components, but not more than half the samples
+                    self.target_dimensions,
+                    original_dim
+                )
+            else:
+                # Normal case for larger datasets
+                n_components = min(self.target_dimensions, n_samples - 1, original_dim)
             
             # Train PCA
             pca = PCA(n_components=n_components)
@@ -68,12 +81,27 @@ class PCATrainer:
             # Calculate explained variance
             explained_variance = np.sum(pca.explained_variance_ratio_)
             
+            # For small datasets, be more lenient with explained variance requirements
+            if n_samples < 50:
+                min_variance_threshold = max(0.7, explained_variance_threshold - 0.2)
+            else:
+                min_variance_threshold = explained_variance_threshold
+            
             # If explained variance is too low, try to increase components
-            if explained_variance < explained_variance_threshold and n_components < original_dim:
-                max_components = min(
-                    int(original_dim * 0.5),  # Don't use more than 50% of original dimensions
-                    embeddings.shape[0]
-                )
+            if explained_variance < min_variance_threshold and n_components < min(original_dim, n_samples - 1):
+                if n_samples < 50:
+                    # For small datasets, be more conservative
+                    max_components = min(
+                        n_samples - 1,  # Can't exceed samples - 1
+                        int(original_dim * 0.8),  # Use up to 80% of original dimensions
+                        self.target_dimensions * 2  # Allow up to 2x target dimensions for small datasets
+                    )
+                else:
+                    # Original logic for larger datasets
+                    max_components = min(
+                        int(original_dim * 0.5),  # Don't use more than 50% of original dimensions
+                        n_samples - 1
+                    )
                 
                 if max_components > n_components:
                     pca = PCA(n_components=max_components)
@@ -352,9 +380,10 @@ class PCAEmbeddingWrapper:
             training_data = embeddings
             
             if training_data is None:
-                if len(self.collected_embeddings) < self.target_dimensions:
+                min_samples_needed = max(3, min(self.target_dimensions // 4, 10))
+                if len(self.collected_embeddings) < min_samples_needed:
                     print(f"Insufficient embeddings for training: {len(self.collected_embeddings)} "
-                          f"< {self.target_dimensions}")
+                          f"< {min_samples_needed} (minimum needed)")
                     return False
                 training_data = np.vstack(self.collected_embeddings)
             

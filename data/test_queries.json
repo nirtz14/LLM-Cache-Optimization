@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "total_queries": 10,
+    "total_queries": 46,
     "dataset_type": "mixed",
     "seed": 42,
     "generation_parameters": {
@@ -12,100 +12,32 @@
   },
   "queries": [
     {
-      "id": "query_000014",
-      "query": "I need help with how to install python on windows",
-      "conversation_id": "similar_conv_000",
-      "category": "similar",
-      "expected_response": "Response for How to install Python on Windows",
-      "context_history": [],
-      "similarity_group": "similar_group_000",
-      "metadata": {
-        "base_query": "How to install Python on Windows",
-        "variation_index": 3,
-        "group_size": 5
-      }
-    },
-    {
-      "id": "query_000015",
-      "query": "Tell me about how to install python on windows",
-      "conversation_id": "similar_conv_000",
-      "category": "similar",
-      "expected_response": "Response for How to install Python on Windows",
-      "context_history": [],
-      "similarity_group": "similar_group_000",
-      "metadata": {
-        "base_query": "How to install Python on Windows",
-        "variation_index": 4,
-        "group_size": 5
-      }
-    },
-    {
-      "id": "query_000007",
-      "query": "Can you explain the relationship between software development and best practices specifically in the context of security requirements?",
-      "conversation_id": "novel_conv_1ff36681",
-      "category": "novel",
-      "expected_response": null,
-      "context_history": [],
-      "similarity_group": null,
-      "metadata": {
-        "template": "Can you explain the relationship between {concept1} and {concept2} specifically in the context of {scenario}?",
-        "length": 134
-      }
-    },
-    {
-      "id": "query_000002",
-      "query": "Where is your nearest location??",
-      "conversation_id": "repetitive_conv_1",
-      "category": "repetitive",
-      "expected_response": null,
-      "context_history": [],
-      "similarity_group": "Where is your nearest location?",
-      "metadata": {
-        "template": "Where is your nearest location?",
-        "variation": 0
-      }
-    },
-    {
-      "id": "query_000001",
-      "query": "How do I reset my password?",
-      "conversation_id": "repetitive_conv_0",
-      "category": "repetitive",
-      "expected_response": null,
-      "context_history": [],
-      "similarity_group": "How do I reset my password?",
-      "metadata": {
-        "template": "How do I reset my password?",
-        "variation": 0
-      }
-    },
-    {
-      "id": "query_000013",
-      "query": "How to install Python on Windows?",
-      "conversation_id": "similar_conv_000",
-      "category": "similar",
-      "expected_response": "Response for How to install Python on Windows",
-      "context_history": [],
-      "similarity_group": "similar_group_000",
-      "metadata": {
-        "base_query": "How to install Python on Windows",
-        "variation_index": 2,
-        "group_size": 5
-      }
-    },
-    {
-      "id": "query_000009",
-      "query": "What aspect would you like to focus on?",
+      "id": "query_000037",
+      "query": "What will you primarily use it for?",
       "conversation_id": "contextual_conv_000",
       "category": "contextual",
       "expected_response": null,
       "context_history": [
-        "How do I improve my presentation skills?"
+        "I need advice on buying a laptop"
       ],
       "similarity_group": null,
       "metadata": {
         "turn_number": 2,
         "total_turns": 3,
         "conversation_topic": "topic_0"
+      }
+    },
+    {
+      "id": "query_000013",
+      "query": "What is your return policy? Thanks!",
+      "conversation_id": "repetitive_conv_12",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "What is your return policy?",
+      "metadata": {
+        "template": "What is your return policy?",
+        "variation": 0
       }
     },
     {
@@ -122,14 +54,416 @@
       }
     },
     {
+      "id": "query_000019",
+      "query": "Can you tell me how do i reset my password?",
+      "conversation_id": "repetitive_conv_18",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "How do I reset my password?",
+      "metadata": {
+        "template": "How do I reset my password?",
+        "variation": 3
+      }
+    },
+    {
+      "id": "query_000024",
+      "query": "My database broke and I need to optimize it but I'm not sure about downtime - what should I do?",
+      "conversation_id": "novel_conv_cf477589",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "My {item} broke and I need to {action} it but I'm not sure about {concern} - what should I do?",
+        "length": 95
+      }
+    },
+    {
+      "id": "query_000034",
+      "query": "My server broke and I need to upgrade it but I'm not sure about data loss - what should I do?",
+      "conversation_id": "novel_conv_65154c27",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "My {item} broke and I need to {action} it but I'm not sure about {concern} - what should I do?",
+        "length": 93
+      }
+    },
+    {
+      "id": "query_000045",
+      "query": "I need help with how to install python on windows",
+      "conversation_id": "similar_conv_000",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_000",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 3,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000023",
+      "query": "My server broke and I need to optimize it but I'm not sure about compatibility - what should I do?",
+      "conversation_id": "novel_conv_9fc079c1",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "My {item} broke and I need to {action} it but I'm not sure about {concern} - what should I do?",
+        "length": 98
+      }
+    },
+    {
+      "id": "query_000025",
+      "query": "I have limited budget and need to achieve alternative approaches while considering data loss - is this possible?",
+      "conversation_id": "novel_conv_aa8c0468",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I have {constraint} and need to {objective} while considering {limitation} - is this possible?",
+        "length": 112
+      }
+    },
+    {
+      "id": "query_000002",
+      "query": "Where is your nearest location??",
+      "conversation_id": "repetitive_conv_1",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "Where is your nearest location?",
+      "metadata": {
+        "template": "Where is your nearest location?",
+        "variation": 0
+      }
+    },
+    {
+      "id": "query_000039",
+      "query": "Can you help me choose a programming language?",
+      "conversation_id": "contextual_conv_001",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 1,
+        "total_turns": 3,
+        "conversation_topic": "topic_1"
+      }
+    },
+    {
+      "id": "query_000027",
+      "query": "I have limited time and need to achieve implementation details while considering downtime - is this possible?",
+      "conversation_id": "novel_conv_2fdc54f4",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I have {constraint} and need to {objective} while considering {limitation} - is this possible?",
+        "length": 109
+      }
+    },
+    {
+      "id": "query_000028",
+      "query": "I have limited time and need to achieve alternative approaches while considering downtime - is this possible?",
+      "conversation_id": "novel_conv_5bb5797e",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I have {constraint} and need to {objective} while considering {limitation} - is this possible?",
+        "length": 109
+      }
+    },
+    {
+      "id": "query_000046",
+      "query": "Tell me about how to install python on windows",
+      "conversation_id": "similar_conv_000",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_000",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 4,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000011",
+      "query": "Can you help me with my order? Thanks!",
+      "conversation_id": "repetitive_conv_10",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "Can you help me with my order?",
+      "metadata": {
+        "template": "Can you help me with my order?",
+        "variation": 2
+      }
+    },
+    {
+      "id": "query_000035",
+      "query": "I have a very specific problem with data analysis involving performance issues and user experience, can you help me understand implementation details?",
+      "conversation_id": "novel_conv_b3da0f1c",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I have a very specific problem with {topic} involving {detail1} and {detail2}, can you help me understand {aspect}?",
+        "length": 150
+      }
+    },
+    {
+      "id": "query_000029",
+      "query": "I'm trying to accomplish best practices but every time I try to repair, I get encounter compatibility. Any suggestions for software development?",
+      "conversation_id": "novel_conv_b390647e",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I'm trying to {goal} but every time I {attempt}, I get {error}. Any suggestions for {context}?",
+        "length": 144
+      }
+    },
+    {
+      "id": "query_000022",
+      "query": "My network broke and I need to configure it but I'm not sure about cost - what should I do?",
+      "conversation_id": "novel_conv_50251dd7",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "My {item} broke and I need to {action} it but I'm not sure about {concern} - what should I do?",
+        "length": 91
+      }
+    },
+    {
+      "id": "query_000031",
+      "query": "Can you explain the relationship between software development and optimization strategies specifically in the context of security requirements?",
+      "conversation_id": "novel_conv_44c1668a",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "Can you explain the relationship between {concept1} and {concept2} specifically in the context of {scenario}?",
+        "length": 143
+      }
+    },
+    {
+      "id": "query_000015",
+      "query": "Can you tell me what are your business hours?",
+      "conversation_id": "repetitive_conv_14",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "What are your business hours?",
+      "metadata": {
+        "template": "What are your business hours?",
+        "variation": 0
+      }
+    },
+    {
+      "id": "query_000006",
+      "query": "How do I contact customer service?",
+      "conversation_id": "repetitive_conv_5",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "How do I contact customer service?",
+      "metadata": {
+        "template": "How do I contact customer service?",
+        "variation": 0
+      }
+    },
+    {
       "id": "query_000010",
-      "query": "I get really nervous and forget what to say",
+      "query": "What is the weather today? Thanks!",
+      "conversation_id": "repetitive_conv_9",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "What is the weather today?",
+      "metadata": {
+        "template": "What is the weather today?",
+        "variation": 1
+      }
+    },
+    {
+      "id": "query_000041",
+      "query": "I want to create web applications and maybe some data analysis",
+      "conversation_id": "contextual_conv_001",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [
+        "Can you help me choose a programming language?",
+        "What do you want to build with it?"
+      ],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 3,
+        "total_turns": 3,
+        "conversation_topic": "topic_1"
+      }
+    },
+    {
+      "id": "query_000008",
+      "query": "Can you help me with my order??",
+      "conversation_id": "repetitive_conv_7",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "Can you help me with my order?",
+      "metadata": {
+        "template": "Can you help me with my order?",
+        "variation": 1
+      }
+    },
+    {
+      "id": "query_000003",
+      "query": "Can you help me with my order??",
+      "conversation_id": "repetitive_conv_2",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "Can you help me with my order?",
+      "metadata": {
+        "template": "Can you help me with my order?",
+        "variation": 0
+      }
+    },
+    {
+      "id": "query_000012",
+      "query": "How do I contact customer service??",
+      "conversation_id": "repetitive_conv_11",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "How do I contact customer service?",
+      "metadata": {
+        "template": "How do I contact customer service?",
+        "variation": 1
+      }
+    },
+    {
+      "id": "query_000032",
+      "query": "My application broke and I need to configure it but I'm not sure about cost - what should I do?",
+      "conversation_id": "novel_conv_1f7c0bf4",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "My {item} broke and I need to {action} it but I'm not sure about {concern} - what should I do?",
+        "length": 95
+      }
+    },
+    {
+      "id": "query_000040",
+      "query": "What do you want to build with it?",
+      "conversation_id": "contextual_conv_001",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [
+        "Can you help me choose a programming language?"
+      ],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 2,
+        "total_turns": 3,
+        "conversation_topic": "topic_1"
+      }
+    },
+    {
+      "id": "query_000042",
+      "query": "How to install Python on Windows",
+      "conversation_id": "similar_conv_000",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_000",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 0,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000033",
+      "query": "My network broke and I need to repair it but I'm not sure about downtime - what should I do?",
+      "conversation_id": "novel_conv_02815e6b",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "My {item} broke and I need to {action} it but I'm not sure about {concern} - what should I do?",
+        "length": 92
+      }
+    },
+    {
+      "id": "query_000018",
+      "query": "What payment methods do you accept?",
+      "conversation_id": "repetitive_conv_17",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "What payment methods do you accept?",
+      "metadata": {
+        "template": "What payment methods do you accept?",
+        "variation": 1
+      }
+    },
+    {
+      "id": "query_000036",
+      "query": "I need advice on buying a laptop",
+      "conversation_id": "contextual_conv_000",
+      "category": "contextual",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "turn_number": 1,
+        "total_turns": 3,
+        "conversation_topic": "topic_0"
+      }
+    },
+    {
+      "id": "query_000007",
+      "query": "What is the weather today?",
+      "conversation_id": "repetitive_conv_6",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "What is the weather today?",
+      "metadata": {
+        "template": "What is the weather today?",
+        "variation": 0
+      }
+    },
+    {
+      "id": "query_000038",
+      "query": "Mostly programming work and some light gaming",
       "conversation_id": "contextual_conv_000",
       "category": "contextual",
       "expected_response": null,
       "context_history": [
-        "How do I improve my presentation skills?",
-        "What aspect would you like to focus on?"
+        "I need advice on buying a laptop",
+        "What will you primarily use it for?"
       ],
       "similarity_group": null,
       "metadata": {
@@ -139,7 +473,138 @@
       }
     },
     {
-      "id": "query_000012",
+      "id": "query_000001",
+      "query": "How do I reset my password?",
+      "conversation_id": "repetitive_conv_0",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "How do I reset my password?",
+      "metadata": {
+        "template": "How do I reset my password?",
+        "variation": 0
+      }
+    },
+    {
+      "id": "query_000005",
+      "query": "How do I reset my password? Thanks!",
+      "conversation_id": "repetitive_conv_4",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "How do I reset my password?",
+      "metadata": {
+        "template": "How do I reset my password?",
+        "variation": 2
+      }
+    },
+    {
+      "id": "query_000044",
+      "query": "How to install Python on Windows?",
+      "conversation_id": "similar_conv_000",
+      "category": "similar",
+      "expected_response": "Response for How to install Python on Windows",
+      "context_history": [],
+      "similarity_group": "similar_group_000",
+      "metadata": {
+        "base_query": "How to install Python on Windows",
+        "variation_index": 2,
+        "group_size": 5
+      }
+    },
+    {
+      "id": "query_000030",
+      "query": "I have a very specific problem with software development involving memory constraints and performance issues, can you help me understand implementation details?",
+      "conversation_id": "novel_conv_121d90cf",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I have a very specific problem with {topic} involving {detail1} and {detail2}, can you help me understand {aspect}?",
+        "length": 160
+      }
+    },
+    {
+      "id": "query_000020",
+      "query": "How do I reset my password please?",
+      "conversation_id": "repetitive_conv_19",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "How do I reset my password?",
+      "metadata": {
+        "template": "How do I reset my password?",
+        "variation": 4
+      }
+    },
+    {
+      "id": "query_000009",
+      "query": "Do you offer free shipping? Thanks!",
+      "conversation_id": "repetitive_conv_8",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "Do you offer free shipping?",
+      "metadata": {
+        "template": "Do you offer free shipping?",
+        "variation": 0
+      }
+    },
+    {
+      "id": "query_000026",
+      "query": "I have a very specific problem with database management involving security requirements and security requirements, can you help me understand implementation details?",
+      "conversation_id": "novel_conv_ba07ccd2",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I have a very specific problem with {topic} involving {detail1} and {detail2}, can you help me understand {aspect}?",
+        "length": 165
+      }
+    },
+    {
+      "id": "query_000017",
+      "query": "What are your business hours??",
+      "conversation_id": "repetitive_conv_16",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "What are your business hours?",
+      "metadata": {
+        "template": "What are your business hours?",
+        "variation": 1
+      }
+    },
+    {
+      "id": "query_000016",
+      "query": "What payment methods do you accept please?",
+      "conversation_id": "repetitive_conv_15",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "What payment methods do you accept?",
+      "metadata": {
+        "template": "What payment methods do you accept?",
+        "variation": 0
+      }
+    },
+    {
+      "id": "query_000021",
+      "query": "I'm trying to accomplish implementation details but every time I try to upgrade, I get encounter compatibility. Any suggestions for database management?",
+      "conversation_id": "novel_conv_2a90532b",
+      "category": "novel",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": null,
+      "metadata": {
+        "template": "I'm trying to {goal} but every time I {attempt}, I get {error}. Any suggestions for {context}?",
+        "length": 152
+      }
+    },
+    {
+      "id": "query_000043",
       "query": "Can you explain how to install python on windows",
       "conversation_id": "similar_conv_000",
       "category": "similar",
@@ -150,6 +615,19 @@
         "base_query": "How to install Python on Windows",
         "variation_index": 1,
         "group_size": 5
+      }
+    },
+    {
+      "id": "query_000014",
+      "query": "Where is your nearest location?",
+      "conversation_id": "repetitive_conv_13",
+      "category": "repetitive",
+      "expected_response": null,
+      "context_history": [],
+      "similarity_group": "Where is your nearest location?",
+      "metadata": {
+        "template": "Where is your nearest location?",
+        "variation": 1
       }
     }
   ]

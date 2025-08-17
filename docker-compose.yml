@@ -1,8 +1,32 @@
 version: '3.8'
 
 services:
+  # Llama-cpp HTTP server for testing
+  llama-server:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.llama
+    container_name: llama-server
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./models:/app/models
+    environment:
+      - MODEL_PATH=/app/models/llama-2-7b-chat-q2k.gguf
+      - HOST=0.0.0.0
+      - PORT=8080
+      - N_CTX=2048
+      - N_THREADS=4
+    working_dir: /app
+    command: python -m llama_cpp.server --model /app/models/llama-2-7b-chat-q2k.gguf --host 0.0.0.0 --port 8080 --n_ctx 2048 --n_threads 4 --n_gpu_layers 0
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/v1/models"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
   enhanced-gptcache:
-    build: 
+    build:
       context: .
       dockerfile: docker/Dockerfile
     container_name: enhanced-gptcache
@@ -19,7 +43,11 @@ services:
       - CONTEXT_ENABLED=true
       - PCA_ENABLED=true
       - FEDERATED_ENABLED=true
+      - LLAMA_SERVER_URL=http://llama-server:8080
     working_dir: /app
+    depends_on:
+      llama-server:
+        condition: service_healthy
     command: --help
 
   # Development service with live code reloading
