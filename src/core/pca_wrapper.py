@@ -48,7 +48,7 @@ class PCATrainer:
             n_samples = embeddings.shape[0]
             
             # Adaptive threshold based on sample size - be more flexible with smaller datasets
-            min_samples_needed = max(3, min(self.target_dimensions // 4, 10))
+            min_samples_needed = max(self.target_dimensions, 10)  # Stricter requirement
             
             if n_samples < min_samples_needed:
                 raise ValueError(

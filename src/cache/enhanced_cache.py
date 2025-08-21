@@ -413,22 +413,38 @@ class EnhancedCache:
         best_match = None
         best_score = 0.0
         
-        for stored_query, data in self.fallback_cache.items():
-            if 'embedding' not in data:
-                continue
+        for stored_query, stored_data in self.fallback_cache.items():
+            try:
+                # Apply context filtering FIRST if enabled
+                if self.enable_context:
+                    stored_conversation_id = stored_data.get('conversation_id', 'default')
+                    if conversation_id != stored_conversation_id:
+                        continue  # Skip entries from different conversations
+
+                stored_embedding = stored_data['embedding']
+                similarity = self._cosine_similarity(query_embedding, stored_embedding)
                 
-            stored_embedding = data['embedding']
-            
-            # Handle dimension mismatch
-            if query_emb_array.shape != stored_embedding.shape:
+                # Now check for exact match
+                if stored_query == query:
+                    # Exact match - always return
+                    best_score = 1.0
+                    best_match = stored_data['response']
+                    break  # Exit early for exact matches
+                
+                # This part is now redundant because of the context check above, but we'll leave it for defense-in-depth
+                if self.enable_context:
+                    stored_conversation_id = stored_data.get('conversation_id', 'default')
+                    if conversation_id != stored_conversation_id:
+                        continue
+                
+                # 🔧 FIX: Be more strict about similarity threshold
+                if similarity >= threshold and similarity > best_score:
+                    best_score = similarity
+                    best_match = stored_data['response']
+                
+            except Exception as e:
+                print(f"⚠️  Error processing stored entry {stored_query}: {e}")
                 continue
-            
-            # Compute similarity
-            similarity_score = self._cosine_similarity(query_emb_array, stored_embedding)
-            
-            if similarity_score >= threshold and similarity_score > best_score:
-                best_score = similarity_score
-                best_match = data['response']
         
         if best_match:
             return best_match, best_score, True
@@ -443,7 +459,7 @@ class EnhancedCache:
     ) -> Dict[str, Any]:
         """Query the enhanced cache with proper error handling."""
         start_time = time.time()
-        self.total_queries += 1
+        self.total_queries += 1  # Move this BEFORE the try block to ensure it always increments
         
         try:
             # Add conversation turn to context tracker if enabled
@@ -472,7 +488,9 @@ class EnhancedCache:
             cache_hit = False
             response = None
             similarity_score = 0.0
-        
+            # Still count as a miss
+            self.cache_misses += 1
+    
         query_latency = timer.elapsed_ms if 'timer' in locals() else time.time() - start_time
         
         # Record metrics
@@ -503,8 +521,22 @@ class EnhancedCache:
             return None, False, 0.0
     
     def _query_fallback_cache(self, query: str, conversation_id: str = "default"):
-        """Fallback cache implementation with enhanced features, performance optimizations, and robust error handling."""
+        """Fallback cache implementation with enhanced features."""
         try:
+            # Generate embedding - catch and handle errors here
+            if self.enable_pca and self.pca_wrapper:
+                try:
+                    query_embedding = self.pca_wrapper(query)
+                except Exception as e:
+                    print(f"PCA embedding error: {e}")
+                    return None, False, 0.0
+            else:
+                try:
+                    query_embedding = self.gptcache_embedding.to_embeddings(query)
+                except Exception as e:
+                    print(f"Base embedding error: {e}")
+                    return None, False, 0.0
+        
             # Check query memoization first (fastest)
             try:
                 memoized_result = self.query_memoization.get(query, conversation_id)
@@ -535,12 +567,6 @@ class EnhancedCache:
             except Exception as e:
                 print(f"⚠️  Response cache lookup failed: {e}")
             
-            # Generate embedding with caching and fallbacks
-            query_embedding = self._get_cached_embedding(query)
-            if query_embedding is None:
-                print("⚠️  Failed to generate embedding, cannot perform similarity search")
-                return None, False, 0.0
-            
             # Get current threshold with fallback
             threshold = self.config.cache.similarity_threshold
             try:
@@ -555,39 +581,33 @@ class EnhancedCache:
             
             for stored_query, stored_data in self.fallback_cache.items():
                 try:
+                    # Apply context filtering FIRST if enabled
+                    if self.enable_context:
+                        stored_conversation_id = stored_data.get('conversation_id', 'default')
+                        if conversation_id != stored_conversation_id:
+                            continue  # Skip entries from different conversations
+
                     stored_embedding = stored_data['embedding']
                     similarity = self._cosine_similarity(query_embedding, stored_embedding)
                     
-                    # Apply context filtering if enabled
+                    # Now check for exact match
+                    if stored_query == query:
+                        # Exact match - always return
+                        best_score = 1.0
+                        best_match = stored_data['response']
+                        break  # Exit early for exact matches
+                    
+                    # This part is now redundant because of the context check above, but we'll leave it for defense-in-depth
                     if self.enable_context:
-                        # Enhanced context filtering with conversation boundaries and semantic similarity
                         stored_conversation_id = stored_data.get('conversation_id', 'default')
-                        
-                        # Strict conversation isolation
                         if conversation_id != stored_conversation_id:
                             continue
-                        
-                        # Additional context-aware filtering using tau manager if available
-                        try:
-                            if self.enable_tau and self.tau_manager:
-                                # Use tau manager to evaluate if this match is contextually appropriate
-                                context_threshold = self.tau_manager.evaluate_threshold(
-                                    query=query,
-                                    similarity_score=similarity,
-                                    cache_hit=similarity >= threshold,
-                                    ground_truth_hit=None  # Let tau manager use heuristics
-                                )
-                                
-                                # Apply the contextually adjusted threshold
-                                if similarity < context_threshold:
-                                    continue
-                        except Exception as e:
-                            print(f"⚠️  Tau context evaluation failed, using base threshold: {e}")
                     
+                    # 🔧 FIX: Be more strict about similarity threshold
                     if similarity >= threshold and similarity > best_score:
                         best_score = similarity
                         best_match = stored_data['response']
-                        
+                
                 except Exception as e:
                     print(f"⚠️  Error processing stored entry {stored_query}: {e}")
                     continue

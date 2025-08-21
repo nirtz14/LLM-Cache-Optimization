@@ -155,7 +155,7 @@ class TestEnhancedCacheIntegration:
                     if "Python" in text:
                         return np.array([1.0, 2.0, 3.0, 4.0])
                     else:
-                        return np.array([5.0, 6.0, 7.0, 8.0])  # Different embedding
+                        return np.array([-1.0, -2.0, -3.0, -4.0])  # Different embedding
                 
                 mock_embedding_instance.to_embeddings.side_effect = mock_embedding_func
                 mock_sbert.return_value = mock_embedding_instance
@@ -177,7 +177,8 @@ class TestEnhancedCacheIntegration:
                 result2 = cache.query("What is JavaScript?")
                 assert result2['cache_hit'] is False
     
-    def test_conversation_context_isolation(self):
+    @patch('src.core.context_similarity.ContextAwareSimilarity')
+    def test_conversation_context_isolation(self, mock_context_class):
         """Test that different conversations are isolated."""
         with patch('src.cache.enhanced_cache.get_config', return_value=self.mock_config):
             with patch('src.cache.enhanced_cache.SBERT') as mock_sbert:
@@ -185,6 +186,10 @@ class TestEnhancedCacheIntegration:
                 mock_embedding_instance = Mock()
                 mock_embedding_instance.to_embeddings.return_value = np.array([1.0, 2.0, 3.0, 4.0])
                 mock_sbert.return_value = mock_embedding_instance
+                
+                # Mock context similarity instance - this is crucial
+                mock_context_instance = Mock()
+                mock_context_class.return_value = mock_context_instance
                 
                 cache = EnhancedCache(
                     enable_context=True,  # Enable context filtering
@@ -297,9 +302,20 @@ class TestEnhancedCacheIntegration:
         """Test cache statistics with all features."""
         with patch('src.cache.enhanced_cache.get_config', return_value=self.mock_config):
             with patch('src.cache.enhanced_cache.SBERT') as mock_sbert:
-                # Mock embedding function
+                # Mock embedding function to return different embeddings for different queries
                 mock_embedding_instance = Mock()
-                mock_embedding_instance.to_embeddings.return_value = np.array([1.0, 2.0, 3.0, 4.0])
+                
+                def mock_embedding_func(text):
+                    if "Query 1" in text:
+                        return np.array([1.0, 2.0, 3.0, 4.0])
+                    elif "Query 2" in text:
+                        return np.array([2.0, 3.0, 4.0, 5.0])
+                    elif "Query 3" in text:
+                        return np.array([-1.0, -2.0, -3.0, -4.0])  # Very different
+                    else:
+                        return np.array([0.0, 0.0, 0.0, 1.0])
+                
+                mock_embedding_instance.to_embeddings.side_effect = mock_embedding_func
                 mock_sbert.return_value = mock_embedding_instance
                 
                 cache = EnhancedCache(

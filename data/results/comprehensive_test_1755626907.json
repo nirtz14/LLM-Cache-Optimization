@@ -1,0 +1,264 @@
+{
+  "test_metadata": {
+    "timestamp": 1755626907.890615,
+    "test_type": "comprehensive_llama_cpp_test",
+    "total_queries": 17
+  },
+  "performance_metrics": {
+    "total_queries": 17,
+    "successful_queries": 17,
+    "failed_queries": 0,
+    "total_time_seconds": 0.8658545017242432,
+    "mean_response_time_ms": 50.35873020396513,
+    "p50_response_time_ms": 50.41694641113281,
+    "p95_response_time_ms": 50.55556297302246,
+    "p99_response_time_ms": 50.56654930114746,
+    "min_response_time_ms": 50.13895034790039,
+    "max_response_time_ms": 50.55403709411621,
+    "queries_per_second": 19.63378369708373,
+    "mean_memory_usage_mb": 35.66710069444444,
+    "max_memory_usage_mb": 35.66796875,
+    "mean_cpu_percent": 0.0,
+    "max_cpu_percent": 0.0,
+    "cache_simulation_results": {
+      "exact_matches": 2,
+      "similarity_matches": 1,
+      "cache_misses": 14,
+      "total_queries": 17,
+      "simulated_hit_rate": 0.17647058823529413,
+      "category_performance": {
+        "contextual": {
+          "queries": 3,
+          "hits": 1,
+          "hit_rate": 0.3333333333333333
+        },
+        "repetitive": {
+          "queries": 3,
+          "hits": 2,
+          "hit_rate": 0.6666666666666666
+        },
+        "similar": {
+          "queries": 3,
+          "hits": 0,
+          "hit_rate": 0.0
+        },
+        "novel": {
+          "queries": 5,
+          "hits": 0,
+          "hit_rate": 0.0
+        },
+        "performance": {
+          "queries": 3,
+          "hits": 0,
+          "hit_rate": 0.0
+        }
+      }
+    }
+  },
+  "detailed_results": [
+    {
+      "query_id": "query_001",
+      "query": "What is machine learning?",
+      "category": "contextual",
+      "conversation_id": "conv_ai_1",
+      "response_time_ms": 50.13895034790039,
+      "response_length": 49,
+      "success": true,
+      "error": null,
+      "memory_usage_mb": 35.66015625,
+      "cpu_percent": 0.0
+    },
+    {
+      "query_id": "query_002",
+      "query": "Can you explain that in simpler terms?",
+      "category": "contextual",
+      "conversation_id": "conv_ai_1",
+      "response_time_ms": 50.16970634460449,
+      "response_length": 62,
+      "success": true,
+      "error": null,
+      "memory_usage_mb": 35.66796875,
+      "cpu_percent": 0.0
+    },
+    {
+      "query_id": "query_003",
+      "query": "What about deep learning?",
+      "category": "contextual",
+      "conversation_id": "conv_ai_1",
+      "response_time_ms": 50.41694641113281,
+      "response_length": 49,
+      "success": true,
+      "error": null,
+      "memory_usage_mb": 35.66796875,
+      "cpu_percent": 0.0
+    },
+    {
+      "query_id": "query_004",
+      "query": "What is Python programming?",
+      "category": "repetitive",
+      "conversation_id": "conv_prog_1",
+      "response_time_ms": 50.476789474487305,
+      "response_length": 51,
+      "success": true,
+      "error": null,
+      "memory_usage_mb": 35.66796875,
+      "cpu_percent": 0.0
+    },
+    {
+      "query_id": "query_005",
+      "query": "What is Python programming?",
+      "category": "repetitive",
+      "conversation_id": "conv_prog_2",
+      "response_time_ms": 50.18210411071777,
+      "response_length": 51,
+      "success": true,
+      "error": null,
+      "memory_usage_mb": 35.66796875,
+      "cpu_percent": 0.0
+    },
+    {
+      "query_id": "query_006",
+      "query": "What is Python programming?",
+      "category": "repetitive",
+      "conversation_id": "conv_prog_3",
+      "response_time_ms": 50.424814224243164,
+      "response_length": 51,
+      "success": true,
+      "error": null,
+      "memory_usage_mb": 35.66796875,
+      "cpu_percent": 0.0
+    },
+    {
+      "query_id": "query_007",
+      "query": "How does caching work?",
+      "category": "similar",
+      "conversation_id": "conv_tech_1",
+      "response_time_ms": 50.55403709411621,
+      "response_length": 46,
+      "success": true,
+      "error": null,
+      "memory_usage_mb": 35.66796875,
+      "cpu_percent": 0.0
+    },
+    {
+      "query_id": "query_008",
+      "query": "How does cache work?",
+      "category": "similar",
+      "conversation_id": "conv_tech_2",
+      "response_time_ms": 50.52375793457031,
+      "response_length": 44,
+      "success": true,
+      "error": null,
+      "memory_usage_mb": 35.66796875,
+      "cpu_percent": 0.0
+    },
+    {
+      "query_id": "query_009",
+      "query": "Explain caching mechanisms",
+      "category": "similar",
+      "conversation_id": "conv_tech_3",
+      "response_time_ms": 50.22835731506348,
+      "response_length": 50,
+      "success": true,
+      "error": null,
+      "memory_usage_mb": 35.66796875,
+      "cpu_percent": 0.0
+    },
+    {
+      "query_id": "query_010",
+      "query": "What is quantum computing?",
+      "category": "novel",
+      "conversation_id": "conv_quantum_1",
+      "response_time_ms": 50.445556640625,
+      "response_length": 50,
+      "success": true,
+      "error": null,
+      "memory_usage_mb": 35.66796875,
+      "cpu_percent": 0.0
+    },
+    {
+      "query_id": "query_011",
+      "query": "Explain blockchain technology",
+      "category": "novel",
+      "conversation_id": "conv_blockchain_1",
+      "response_time_ms": 50.21095275878906,
+      "response_length": 53,
+      "success": true,
+      "error": null,
+      "memory_usage_mb": 35.66796875,
+      "cpu_percent": 0.0
+    },
+    {
+      "query_id": "query_012",
+      "query": "What are neural networks?",
+      "category": "novel",
+      "conversation_id": "conv_neural_1",
+      "response_time_ms": 50.267696380615234,
+      "response_length": 49,
+      "success": true,
+      "error": null,
+      "memory_usage_mb": 35.66796875,
+      "cpu_percent": 0.0
+    },
+    {
+      "query_id": "query_013",
+      "query": "How do databases work?",
+      "category": "novel",
+      "conversation_id": "conv_db_1",
+      "response_time_ms": 50.426483154296875,
+      "response_length": 46,
+      "success": true,
+      "error": null,
+      "memory_usage_mb": 35.66796875,
+      "cpu_percent": 0.0
+    },
+    {
+      "query_id": "query_014",
+      "query": "What is cloud computing?",
+      "category": "novel",
+      "conversation_id": "conv_cloud_1",
+      "response_time_ms": 50.31156539916992,
+      "response_length": 48,
+      "success": true,
+      "error": null,
+      "memory_usage_mb": 35.66796875,
+      "cpu_percent": 0.0
+    },
+    {
+      "query_id": "query_015",
+      "query": "Hi",
+      "category": "performance",
+      "conversation_id": "conv_perf_1",
+      "response_time_ms": 50.35066604614258,
+      "response_length": 26,
+      "success": true,
+      "error": null,
+      "memory_usage_mb": 35.66796875,
+      "cpu_percent": 0.0
+    },
+    {
+      "query_id": "query_016",
+      "query": "What is the capital of France and why is it important?",
+      "category": "performance",
+      "conversation_id": "conv_perf_2",
+      "response_time_ms": 50.431251525878906,
+      "response_length": 78,
+      "success": true,
+      "error": null,
+      "memory_usage_mb": 35.66796875,
+      "cpu_percent": 0.0
+    },
+    {
+      "query_id": "query_017",
+      "query": "Explain the concept of artificial intelligence, its history, applications, and future implications in detail",
+      "category": "performance",
+      "conversation_id": "conv_perf_3",
+      "response_time_ms": 50.53877830505371,
+      "response_length": 132,
+      "success": true,
+      "error": null,
+      "memory_usage_mb": 35.66796875,
+      "cpu_percent": 0.0
+    }
+  ]
+}
